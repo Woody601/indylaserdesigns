@@ -10,13 +10,13 @@ export default function NavBar() {
 
   // Close nav if screen size changes to desktop
   useEffect(() => {
-    if (screenWidth >= 596 && isToggled) {
+    if (screenWidth >= 599 && isToggled) {
       setToggled(false);
     }
   }, [screenWidth, isToggled]);
 
   const toggleNav = () => {
-    if (screenWidth <= 595) {
+    if (screenWidth <= 598) {
       setToggled(!isToggled);
     }
   };
