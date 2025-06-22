@@ -1,0 +1,4 @@
+.products {
+  display: -ms-grid;
+  display: grid;
+}
