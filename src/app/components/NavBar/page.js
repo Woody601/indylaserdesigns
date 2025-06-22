@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 import Image from "next/image";
@@ -21,11 +21,11 @@ export default function NavBar() {
     }
   };
 
-  const closeNav = () => {
+  const closeNav = useCallback(() => {
     if (isToggled) {
       setToggled(false);
     }
-  };
+  }, [isToggled]);
 
   const updateScreenWidth = () => {
     setScreenWidth(window.innerWidth);
@@ -62,7 +62,7 @@ export default function NavBar() {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("popstate", handlePopState);
     };
-  }, [isToggled]); // Add isToggled to dependency array
+  }, [isToggled, closeNav]); // Add isToggled to dependency array
 
   return (
     <>
