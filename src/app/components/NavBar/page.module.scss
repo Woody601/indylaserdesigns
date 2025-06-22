@@ -38,7 +38,7 @@
   align-items: center;
   transition: transform 0.2s, color 0.2s;
   &.logo {
-    padding: 7.5px;
+    padding: 12.5px;
 
     // padding: 7.5px 15px;
   }
@@ -97,11 +97,11 @@
 @media screen and (max-width: 598px) {
   .navHolder.active {
     .items {
-      transform: translateX(-100%);
+      transform: translate(-100%);
     }
   }
   .items {
-    height: calc(100vh - 50px);
+    height: calc(100vh - 65px);
     padding: 0;
     flex-direction: column;
     width: 50%;
@@ -115,21 +115,5 @@
   .bars {
     display: block;
     transition: 0.5s;
-  }
-}
-
-@media (pointer: coarse), (hover: none) {
-  .navHolder {
-    height: 65px;
-    .item {
-      .logo {
-        height: 50px;
-      }
-    }
-  }
-}
-/* Fixed media query */
-@media (hover: none), (max-width: 595px) {
-  .items {
   }
 }

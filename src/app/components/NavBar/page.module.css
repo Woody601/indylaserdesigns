@@ -65,7 +65,7 @@
   transition: transform 0.2s, color 0.2s, -webkit-transform 0.2s;
 }
 .item.logo {
-  padding: 7.5px;
+  padding: 12.5px;
 }
 .item:hover {
   color: #d35400;
@@ -124,11 +124,11 @@
 
 @media screen and (max-width: 598px) {
   .navHolder.active .items {
-    -webkit-transform: translateX(-100%);
-            transform: translateX(-100%);
+    -webkit-transform: translate(-100%);
+            transform: translate(-100%);
   }
   .items {
-    height: calc(100vh - 50px);
+    height: calc(100vh - 65px);
     padding: 0;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -155,12 +155,3 @@
     transition: 0.5s;
   }
 }
-@media (pointer: coarse), (hover: none) {
-  .navHolder {
-    height: 65px;
-  }
-  .navHolder .item .logo {
-    height: 50px;
-  }
-}
-/* Fixed media query */
