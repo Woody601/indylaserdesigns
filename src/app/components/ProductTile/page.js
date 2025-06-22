@@ -2,16 +2,16 @@
 import { useState, useEffect } from "react";
 import NextImage from "next/image";
 import styles from "./page.module.css";
-import Link from "next/link";
 
 export default function ProductTile({ productTitle, colors }) {
-  const combinedColorNames = colors.map((color) =>
+  const combinedColorNames = (colors || []).map((color) =>
     color.toLowerCase().replace(/\s+/g, "")
   );
 
   const [selectedColor, setSelectedColor] = useState(
-    colors.length > 0 ? colors[0] : null
+    (colors || []).length > 0 ? colors[0] : null
   );
+
   const [hoverColor, setHoverColor] = useState(null); // <-- add hover state
 
   // Preload all color images
@@ -71,7 +71,7 @@ export default function ProductTile({ productTitle, colors }) {
 
       {/* Color Buttons */}
       <div className={styles.colorButtons}>
-        {colors.length > 0 ? (
+        {(colors || []).length > 0 ? (
           colors.map((color) => {
             const cleanedColor = color.toLowerCase().replace(/\s+/g, "");
             const isSelected = selectedColor === color;
