@@ -2,7 +2,7 @@
   position: fixed;
   background-color: #fff;
   width: -webkit-fill-available;
-  height: 50px;
+  height: 65px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -42,8 +42,9 @@
   background-color: inherit;
   -webkit-transition: opacity 0.2s;
   transition: opacity 0.2s;
-  z-index: 999;
-  row-gap: 1rem;
+}
+.items .item {
+  padding: 20px;
 }
 
 .item {
@@ -52,7 +53,6 @@
   font-family: Poppins;
   font-size: 12pt;
   text-transform: uppercase;
-  padding: 12.5px;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -72,33 +72,32 @@
 }
 
 .bars {
-  visibility: hidden;
-  padding: 10.5px 12.5px;
-  float: right;
+  display: none;
   cursor: pointer;
+  padding: 13px 15px;
 }
 .bars .bar {
   display: block;
-  width: 25px;
-  margin: 5px 0;
+  margin: 6px 0;
   background-color: #000;
-  height: 3px;
   border-radius: 5px;
   -webkit-transition: background-color 0.2s, opacity 0.5s, -webkit-transform 0.5s;
   transition: background-color 0.2s, opacity 0.5s, -webkit-transform 0.5s;
   transition: background-color 0.2s, opacity 0.5s, transform 0.5s;
   transition: background-color 0.2s, opacity 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  width: 35px;
+  height: 5px;
 }
 .bars.active .bar:nth-child(1) {
-  -webkit-transform: translateY(8px) rotate(-45deg);
-          transform: translateY(8px) rotate(-45deg);
+  -webkit-transform: translateY(11px) rotate(-45deg);
+          transform: translateY(11px) rotate(-45deg);
 }
 .bars.active .bar:nth-child(2) {
   opacity: 0;
 }
 .bars.active .bar:nth-child(3) {
-  -webkit-transform: translateY(-8px) rotate(45deg);
-          transform: translateY(-8px) rotate(45deg);
+  -webkit-transform: translateY(-11px) rotate(45deg);
+          transform: translateY(-11px) rotate(45deg);
 }
 
 .bars:hover .bar {
@@ -148,11 +147,20 @@
     transition: transform 0.5s, opacity 0s;
     transition: transform 0.5s, opacity 0s, -webkit-transform 0.5s;
     position: absolute;
-    top: 50px;
+    top: 65px;
   }
   .bars {
-    visibility: visible;
+    display: block;
     -webkit-transition: 0.5s;
     transition: 0.5s;
   }
 }
+@media (pointer: coarse), (hover: none) {
+  .navHolder {
+    height: 65px;
+  }
+  .navHolder .item .logo {
+    height: 50px;
+  }
+}
+/* Fixed media query */

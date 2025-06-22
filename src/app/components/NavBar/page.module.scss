@@ -2,7 +2,7 @@
   position: fixed;
   background-color: #fff;
   width: -webkit-fill-available;
-  height: 50px;
+  height: 65px;
   display: flex;
   align-items: flex-start;
   flex-direction: row;
@@ -23,8 +23,9 @@
   // background-color: aqua;
   background-color: inherit;
   transition: opacity 0.2s;
-  z-index: 999;
-  row-gap: 1rem;
+  .item {
+    padding: 20px;
+  }
 }
 
 .item {
@@ -33,13 +34,12 @@
   font-family: Poppins;
   font-size: 12pt;
   text-transform: uppercase;
-  padding: 12.5px;
-
   display: inline-flex;
   align-items: center;
   transition: transform 0.2s, color 0.2s;
   &.logo {
     padding: 7.5px;
+
     // padding: 7.5px 15px;
   }
   &:hover {
@@ -48,21 +48,20 @@
 }
 
 .bars {
-  visibility: hidden;
-  padding: 10.5px 12.5px;
-  float: right;
+  display: none;
   cursor: pointer;
+  padding: 13px 15px;
   .bar {
     display: block;
-    width: 25px;
-    margin: 5px 0;
+    margin: 6px 0;
     background-color: #000;
-    height: 3px;
     border-radius: 5px;
     transition: background-color 0.2s, opacity 0.5s, transform 0.5s;
+    width: 35px;
+    height: 5px;
   }
   &.active .bar:nth-child(1) {
-    transform: translateY(8px) rotate(-45deg);
+    transform: translateY(11px) rotate(-45deg);
   }
 
   &.active .bar:nth-child(2) {
@@ -70,7 +69,7 @@
   }
 
   &.active .bar:nth-child(3) {
-    transform: translateY(-8px) rotate(45deg);
+    transform: translateY(-11px) rotate(45deg);
   }
 }
 .bars:hover {
@@ -111,10 +110,26 @@
     align-items: stretch;
     transition: transform 0.5s, opacity 0s;
     position: absolute;
-    top: 50px;
+    top: 65px;
   }
   .bars {
-    visibility: visible;
+    display: block;
     transition: 0.5s;
+  }
+}
+
+@media (pointer: coarse), (hover: none) {
+  .navHolder {
+    height: 65px;
+    .item {
+      .logo {
+        height: 50px;
+      }
+    }
+  }
+}
+/* Fixed media query */
+@media (hover: none), (max-width: 595px) {
+  .items {
   }
 }

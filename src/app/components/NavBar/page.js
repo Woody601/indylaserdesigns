@@ -74,8 +74,8 @@ export default function NavBar() {
         >
           <Image
             src="/logo.png"
-            width={104.34}
-            height={35}
+            width={148}
+            height={50}
             alt="Indy Laser Designs logo"
           />
         </Link>
