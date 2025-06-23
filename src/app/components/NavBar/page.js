@@ -73,11 +73,11 @@ export default function NavBar() {
           className={`${styles.item} ${styles.logo}`}
         >
           <NextImage
-            src="/logo.png"
+            src="/logo.svg"
             width={119.06}
             height={40}
             alt="Indy Laser Designs logo"
-            priority
+            loading="eager"
           />
         </Link>
 

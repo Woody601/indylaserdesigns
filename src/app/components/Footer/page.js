@@ -41,7 +41,13 @@ export default function Footer() {
       <div className={styles.copyright}>
         © {new Date().getFullYear()} Indy Laser Designs - All Rights Reserved.
         Website Built By{" "}
-        <Link href="mailto:mychalwood@gmail.com">Mychal Wood</Link>
+        <Link
+          href="https://mychalwood.vercel.app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Mychal Wood
+        </Link>
       </div>
     </footer>
   );
