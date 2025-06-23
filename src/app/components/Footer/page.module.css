@@ -39,10 +39,9 @@
   text-decoration: none;
 }
 .footer a:hover {
-  color: #d35400;
+  color: #a60303;
 }
 .footer .section {
-  min-width: 210px;
   color: white;
   display: block;
   padding: 0px 15px;
@@ -60,4 +59,10 @@
   color: #fff;
   padding: 30px;
   text-align: center;
+}
+
+@media screen and (max-width: 462px) {
+  .footer .section {
+    min-width: 238px;
+  }
 }

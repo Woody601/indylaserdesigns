@@ -43,7 +43,7 @@
     // padding: 7.5px 15px;
   }
   &:hover {
-    color: #d35400;
+    color: #a60303;
   }
 }
 
@@ -72,11 +72,6 @@
     transform: translateY(-11px) rotate(45deg);
   }
 }
-.bars:hover {
-  .bar {
-    background-color: #d68e54;
-  }
-}
 .overlay {
   position: fixed;
   width: 100vw;
@@ -94,7 +89,7 @@
   }
 }
 
-@media screen and (max-width: 598px) {
+@media screen and (max-width: 768px) {
   .navHolder.active {
     .items {
       transform: translate(-100%);
@@ -104,13 +99,17 @@
     height: calc(100vh - 65px);
     padding: 0;
     flex-direction: column;
-    width: 50%;
-    right: -50%;
+    width: 100%;
+    right: -100%;
     justify-content: flex-start;
     align-items: stretch;
     transition: transform 0.5s, opacity 0s;
     position: absolute;
     top: 65px;
+    border-top: 1px solid #e5e5e5;
+    .item {
+      border-bottom: 1px solid #e5e5e5;
+    }
   }
   .bars {
     display: block;

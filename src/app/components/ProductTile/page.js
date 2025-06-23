@@ -65,12 +65,12 @@ export default function ProductTile({ productTitle, colors }) {
       )}
 
       {/* Hovered or Selected Color Label */}
-      <div className={styles.productColor}>
+      {/* <div className={styles.productColor}>
         {hoverColor || selectedColor || "No color selected"}
-      </div>
+      </div> */}
 
       {/* Color Buttons */}
-      <div className={styles.colorButtons}>
+      {/* <div className={styles.colorButtons}>
         {(colors || []).length > 0 ? (
           colors.map((color) => {
             const cleanedColor = color.toLowerCase().replace(/\s+/g, "");
@@ -97,7 +97,7 @@ export default function ProductTile({ productTitle, colors }) {
         ) : (
           <p>No colors available for this product.</p>
         )}
-      </div>
+      </div> */}
       <div
         className={`${styles.button} ${styles.customize}`}
         onClick={handleCustomizeClick}

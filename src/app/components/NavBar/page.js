@@ -2,7 +2,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
-import NextImage from "next/image";
+import Image from "next/image";
 
 export default function NavBar() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -10,13 +10,13 @@ export default function NavBar() {
 
   // Close nav if screen size changes to desktop
   useEffect(() => {
-    if (screenWidth >= 599 && isToggled) {
+    if (screenWidth >= 769 && isToggled) {
       setToggled(false);
     }
   }, [screenWidth, isToggled]);
 
   const toggleNav = () => {
-    if (screenWidth <= 598) {
+    if (screenWidth <= 768) {
       setToggled(!isToggled);
     }
   };
@@ -72,7 +72,7 @@ export default function NavBar() {
           onClick={closeNav}
           className={`${styles.item} ${styles.logo}`}
         >
-          <NextImage
+          <Image
             src="/logo.svg"
             width={119.06}
             height={40}
@@ -99,16 +99,19 @@ export default function NavBar() {
           <Link href="/pricing" onClick={closeNav} className={styles.item}>
             Pricing
           </Link>
+          <Link href="/products" onClick={closeNav} className={styles.item}>
+            Products
+          </Link>
           <Link href="/contact" onClick={closeNav} className={styles.item}>
             Contact
           </Link>
         </div>
       </nav>
-
-      <div
+      <div className={`${styles.overlay} ${isToggled ? styles.active : ""}`} />
+      {/* <div
         className={`${styles.overlay} ${isToggled ? styles.active : ""}`}
         onClick={closeNav}
-      />
+      /> */}
     </>
   );
 }

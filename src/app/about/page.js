@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 export const metadata = {
-  title: "About",
+  title: "About – Indy Laser Designs",
 };
 export default function About() {
   return (

@@ -9,15 +9,16 @@
   height: fit-content;
   padding: 30px;
   background-color: #ffffff;
-  border: 1px solid #000000;
+  outline: 1px solid #000000;
   display: -ms-grid;
   display: grid;
-  gap: 20px;
+  gap: 30px;
   font-family: Poppins;
+  text-transform: uppercase;
 }
 
 .productName {
-  font-size: 20px;
+  font-size: 16pt;
   color: #000000;
 }
 
@@ -26,7 +27,7 @@
 }
 
 .productColor {
-  font-size: 16px;
+  font-size: 14pt;
   color: #000000;
   text-align: center;
 }
@@ -56,13 +57,13 @@
   width: 22px;
   height: 22px;
   padding: 0;
-  border-radius: 100%;
+  border-radius: 50%;
 }
 
 .button {
   background-color: lightgray;
   cursor: pointer;
-  padding: 10px 14px;
+  padding: 12.5px 20px;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -139,4 +140,11 @@
 
 .black {
   background-color: black;
+}
+
+@media (pointer: coarse), (hover: none) {
+  .colorButtons .button {
+    width: 44px;
+    height: 44px;
+  }
 }

@@ -1,4 +1,6 @@
-.products {
-  display: -ms-grid;
-  display: grid;
+.pricing {
+  font-family: Poppins;
+  position: inherit;
+  max-width: 75vw;
+  margin: auto;
 }
