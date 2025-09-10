@@ -2,8 +2,11 @@
 import { useState, useEffect } from "react";
 import NextImage from "next/image";
 import styles from "./page.module.css";
+import { useRouter } from "next/navigation"; // <-- import router
 
-export default function ProductTile({ productTitle, colors }) {
+export default function ProductTile({ productTitle, colors, productId }) {
+  const router = useRouter();
+
   const combinedColorNames = (colors || []).map((color) =>
     color.toLowerCase().replace(/\s+/g, "")
   );
@@ -30,9 +33,7 @@ export default function ProductTile({ productTitle, colors }) {
   };
 
   const handleCustomizeClick = () => {
-    alert(
-      "Sorry, but the customizer is not ready quite yet. Please check back in the future."
-    );
+    router.push(`/products/customize/${productId}`);
   };
 
   const displayedColor = hoverColor || selectedColor;

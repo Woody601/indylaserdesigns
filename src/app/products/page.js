@@ -26,6 +26,7 @@ export default async function Products() {
             key={product.id}
             productTitle={product.name}
             colors={product.colors}
+            productId={product.id}
           />
         ))
       ) : (
