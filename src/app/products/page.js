@@ -1,15 +1,17 @@
 // app/products/page.js
+
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import styles from "./page.module.css";
-import ProductTile from "../components/ProductTile/page";
+import ProductTypeTile from "../components/ProductTypeTile/page";
 export const metadata = {
   title: "Products – Indy Laser Designs",
 };
+
 export default async function Products() {
   let products = [];
   try {
-    const productSnapshot = await getDocs(collection(db, "products"));
+    const productSnapshot = await getDocs(collection(db, "productTypes"));
     products = productSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -19,19 +21,17 @@ export default async function Products() {
   }
 
   return (
-    <div className={styles.products}>
-      {products.length > 0 ? (
-        products.map((product) => (
-          <ProductTile
-            key={product.id}
-            productTitle={product.name}
-            colors={product.colors}
-            productId={product.id}
-          />
-        ))
-      ) : (
-        <p>No products available.</p>
-      )}
-    </div>
+    <>
+      <h1 className={styles.header}>Products</h1>
+      <div className={styles.products}>
+        {products.length > 0 ? (
+          products.map((product) => (
+            <ProductTypeTile typeName={product.name} typeSlug={product.slug} />
+          ))
+        ) : (
+          <p>No products available.</p>
+        )}
+      </div>
+    </>
   );
 }

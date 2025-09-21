@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 import Image from "next/image";
+import SubNav from "./SubNav/page";
 
 export default function NavBar() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -78,6 +79,7 @@ export default function NavBar() {
             height={40}
             alt="Indy Laser Designs logo"
             loading="eager"
+            priority
           />
         </Link>
 
@@ -93,25 +95,31 @@ export default function NavBar() {
           <Link href="/about" onClick={closeNav} className={styles.item}>
             About
           </Link>
+
           <Link href="/materials" onClick={closeNav} className={styles.item}>
             Materials
           </Link>
           <Link href="/pricing" onClick={closeNav} className={styles.item}>
             Pricing
           </Link>
-          <Link href="/products" onClick={closeNav} className={styles.item}>
-            Products
-          </Link>
+          <SubNav>
+            <Link href="/products" onClick={closeNav}>
+              Products
+            </Link>
+            <Link href="/products/drinkware" onClick={closeNav}>
+              Drinkware
+            </Link>
+          </SubNav>
           <Link href="/contact" onClick={closeNav} className={styles.item}>
             Contact
           </Link>
         </div>
       </nav>
-      <div className={`${styles.overlay} ${isToggled ? styles.active : ""}`} />
-      {/* <div
+
+      <div
         className={`${styles.overlay} ${isToggled ? styles.active : ""}`}
         onClick={closeNav}
-      /> */}
+      />
     </>
   );
 }

@@ -1,62 +1,80 @@
 .productTile {
-  max-width: 530px;
   width: fit-content;
-  max-height: 711px;
+  max-width: 300px;
   height: fit-content;
-  padding: 30px;
+  // padding: 30px;
   background-color: #ffffff;
-  outline: 1px solid #000000;
-  display: grid;
-  gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   font-family: Poppins;
   text-transform: uppercase;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  margin: -0.5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition-duration: 150ms;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.06) 0px 0px 0px 1px,
+      rgba(0, 0, 0, 0.15) 0px 8px 16px -4px;
+    padding: 0.75rem;
+    margin: -0.75rem;
+  }
+}
+.productDetails {
+  flex: 1 1 0%;
+
+  .productName {
+    font-size: 12pt;
+    color: #000000;
+    font-weight: 500;
+    line-height: 1.25;
+  }
 }
 
-.productName {
-  font-size: 16pt;
-  color: #000000;
+.productImagecontainer {
+  box-shadow: rgb(245, 245, 245) 0px 0px 60px 24px inset;
+  inset: 0px;
+  mix-blend-mode: darken;
+  border-radius: 0.5rem;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-basis: 40%;
+  max-width: 300px; /* Caps width at 300px */
+  max-height: 300px;
 }
-
 .productImage {
-  margin: auto;
+  width: 100%; /* Scales to container width */
+  max-width: 300px; /* Caps width at 300px */
+  max-height: 300px;
+  min-height: 120px;
+  height: 100%; /* Maintains aspect ratio */
+  object-fit: cover; /* Ensures image fills container without stretching */
+  aspect-ratio: 1 / 1;
 }
-
-.productColor {
-  font-size: 14pt;
-  color: #000000;
-  text-align: center;
-}
-
-.customizeButton {
-  width: 110px;
-  height: 60px;
-  border: none;
-  background-color: gray;
-  padding: 0;
-}
-
 .colorButtons {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 12px;
-  row-gap: 18px;
-  max-width: 294px;
-  margin: auto;
+  gap: 0.5rem;
+  max-width: 300px;
   .button {
-    width: 22px;
-    height: 22px;
+    width: 1rem;
+    height: 1rem;
     padding: 0;
-    border-radius: 50%;
+    border-radius: 25%;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 2px;
+    }
   }
 }
-.button {
-  background-color: lightgray;
-  cursor: pointer;
-  padding: 12.5px 20px;
-  width: fit-content;
-}
-.button.customize {
-  margin-left: auto;
+.remainingIndicator {
+  font-size: 13px;
+  font-family: "Sharp Sans", Helvetica, Arial, "Trebuchet MS", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
 }
 
 .coral {
@@ -100,7 +118,8 @@
 }
 .white {
   background-color: #fff;
-  border: 1px solid darkgray;
+  border: 1px solid rgb(227, 227, 227);
+  mix-blend-mode: darken;
 }
 .stainlesssteel {
   background-color: darkgray;
@@ -111,11 +130,32 @@
 .black {
   background-color: black;
 }
-@media (pointer: coarse), (hover: none) {
+@media screen and (max-width: 768px) {
+  .productTile {
+    flex-direction: row;
+    max-width: none;
+    width: auto;
+    gap: 0.75rem;
+    margin: 0;
+    &:hover {
+      box-shadow: none;
+      padding: 0.5rem;
+      margin: 0;
+    }
+  }
+  .productDetails {
+    width: 60%;
+  }
+  .remainingIndicator {
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+  }
   .colorButtons {
+    max-width: 184px;
     .button {
-      width: 44px;
-      height: 44px;
+      width: 1.5rem;
+      height: 1.5rem;
     }
   }
 }

@@ -1,0 +1,120 @@
+.itemDropDown {
+  background-color: inherit;
+  height: 65px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: start;
+  overflow: clip;
+
+  transition: height 0.25s;
+  &.active {
+    overflow-clip-margin: 3px;
+    /* Allow content (including shadow) to extend 10px beyond the padding box */
+  }
+  .dropDown {
+    display: flex;
+  }
+  a {
+    text-decoration: none;
+    color: #000;
+    font-family: Poppins;
+    font-size: 12pt;
+    text-transform: uppercase;
+    transition: transform 0.2s, color 0.2s;
+
+    padding: 1.25rem 0.75rem 1.25rem 1.25rem;
+  }
+  a:hover {
+    color: #a60303;
+  }
+  &:first-child a {
+    width: 100%;
+  }
+}
+
+.items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  // background-color: aqua;
+  background-color: inherit;
+  transition: opacity 0.2s;
+  width: 100%;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+
+  .item {
+    padding: 1.25rem;
+  }
+}
+
+.items {
+  a {
+    text-decoration: none;
+    color: #000;
+    font-family: Poppins;
+    font-size: 12pt;
+    text-transform: uppercase;
+    transition: transform 0.2s, color 0.2s;
+    width: -webkit-fill-available;
+    padding: 1.25rem;
+  }
+  a:hover {
+    color: #a60303;
+  }
+}
+
+.block {
+  display: block;
+
+  cursor: pointer;
+  padding: 23.5px 20px 23.5px 0;
+
+  display: inline-block;
+
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transition: transform 0.25s, border-color 0.2s;
+    &:hover {
+      border-color: #a60303;
+    }
+  }
+  &.active .arrow:nth-child(1) {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+}
+@media screen and (max-width: 768px) {
+  .itemDropDown {
+    align-items: stretch;
+    a {
+      max-width: 243px;
+      width: 100%;
+    }
+  }
+  .items {
+    padding: 0;
+    flex-direction: column;
+    width: 320px;
+    justify-content: flex-start;
+
+    // align-items: stretch;
+    transition: transform 0.5s, opacity 0s;
+    box-shadow: none;
+    height: 500px;
+    width: 100%;
+    a {
+      padding: 1.25rem 2.5rem;
+    }
+  }
+  .block {
+    padding: 23.5px 18px;
+  }
+  .items.active {
+    display: flex;
+  }
+}

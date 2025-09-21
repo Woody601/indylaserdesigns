@@ -1,11 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import NextImage from "next/image";
 import styles from "./page.module.css";
-import { useRouter } from "next/navigation"; // <-- import router
+import { useRouter } from "next/navigation";
 
-export default function ProductTile({ productTitle, colors, productId }) {
+export default function ProductTile({
+  productTitle,
+  colors,
+  productSlug,
+  productType,
+}) {
   const router = useRouter();
+  const [containerWidth, setContainerWidth] = useState(0);
+  const containerRef = useRef(null);
 
   const combinedColorNames = (colors || []).map((color) =>
     color.toLowerCase().replace(/\s+/g, "")
@@ -15,7 +22,7 @@ export default function ProductTile({ productTitle, colors, productId }) {
     (colors || []).length > 0 ? colors[0] : null
   );
 
-  const [hoverColor, setHoverColor] = useState(null); // <-- add hover state
+  const [hoverColor, setHoverColor] = useState(null);
 
   // Preload all color images
   useEffect(() => {
@@ -28,15 +35,39 @@ export default function ProductTile({ productTitle, colors, productId }) {
     });
   }, [productTitle, combinedColorNames]);
 
+  // Update container width on mount, resize, and layout changes
+  useEffect(() => {
+    const updateWidth = () => {
+      if (containerRef.current) {
+        const width = containerRef.current.getBoundingClientRect().width;
+        setContainerWidth(width);
+      }
+    };
+
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+
+    // Use ResizeObserver for dynamic layout changes
+    const observer = new ResizeObserver(updateWidth);
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => {
+      window.removeEventListener("resize", updateWidth);
+      if (containerRef.current) {
+        observer.unobserve(containerRef.current);
+      }
+    };
+  }, []);
+
   const handleColorChange = (name) => {
     setSelectedColor(name);
   };
 
   const handleCustomizeClick = () => {
-    router.push(`/products/customize/${productId}`);
+    router.push(`${productType}/${productSlug}`);
   };
-
-  const displayedColor = hoverColor || selectedColor;
 
   const getImageUrl = (color) => {
     return `https://firebasestorage.googleapis.com/v0/b/indy-laser-designs.firebasestorage.app/o/products%2F${productTitle
@@ -46,64 +77,81 @@ export default function ProductTile({ productTitle, colors, productId }) {
       .replace(/\s+/g, "")}.png?alt=media`;
   };
 
+  // Calculate number of buttons that fit in one row
+  const buttonWidth = containerWidth <= 768 ? 24 : 16; // Match CSS
+  const gap = containerWidth <= 768 ? 8 : 8; // Match CSS
+  const maxButtons = Math.max(
+    1,
+    Math.floor(containerWidth / (buttonWidth + gap))
+  );
+  const displayedColors = colors.slice(0, maxButtons);
+  const remainingColors = colors.length - displayedColors.length;
+
+  const displayedColor = hoverColor || selectedColor;
+
   return (
-    <div className={styles.productTile}>
-      {/* Product Name */}
-      <div className={styles.productName}>{productTitle}</div>
-
+    <div className={styles.productTile} onClick={handleCustomizeClick}>
       {/* Product Image */}
-      {displayedColor ? (
-        <NextImage
-          src={getImageUrl(displayedColor)}
-          alt={`${displayedColor} tumbler`}
-          width={300}
-          height={300}
-          priority
-          className={styles.productImage}
-        />
-      ) : (
-        <p>No image available</p>
-      )}
-
-      {/* Hovered or Selected Color Label */}
-      {/* <div className={styles.productColor}>
-        {hoverColor || selectedColor || "No color selected"}
-      </div> */}
-
-      {/* Color Buttons */}
-      {/* <div className={styles.colorButtons}>
-        {(colors || []).length > 0 ? (
-          colors.map((color) => {
-            const cleanedColor = color.toLowerCase().replace(/\s+/g, "");
-            const isSelected = selectedColor === color;
-
-            return (
-              <div
-                key={cleanedColor}
-                onClick={() => handleColorChange(color)}
-                onMouseEnter={() => setHoverColor(color)}
-                onMouseLeave={() => setHoverColor(null)}
-                className={`${styles.button} ${styles[cleanedColor]} ${
-                  isSelected ? styles.selected : ""
-                }`}
-                role="button"
-                tabIndex={0}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") handleColorChange(color);
-                }}
-                aria-pressed={isSelected}
-              />
-            );
-          })
+      <div className={styles.productImagecontainer}>
+        {displayedColor ? (
+          <NextImage
+            src={getImageUrl(displayedColor)}
+            alt={`${displayedColor} tumbler`}
+            width={300}
+            height={300}
+            className={styles.productImage}
+            priority={true}
+          />
         ) : (
-          <p>No colors available for this product.</p>
+          <p>No image available</p>
         )}
-      </div> */}
-      <div
-        className={`${styles.button} ${styles.customize}`}
-        onClick={handleCustomizeClick}
-      >
-        Customize
+      </div>
+
+      <div className={styles.productDetails}>
+        {/* Product Name */}
+        <div className={styles.productName}>{productTitle}</div>
+        {/* Color Buttons */}
+        <div className={styles.colorButtons} ref={containerRef}>
+          {(displayedColors || []).length > 0 ? (
+            <>
+              {displayedColors.map((color) => {
+                const cleanedColor = color.toLowerCase().replace(/\s+/g, "");
+                const isSelected = selectedColor === color;
+
+                return (
+                  <div
+                    key={cleanedColor}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleColorChange(color);
+                    }}
+                    onMouseEnter={() => setHoverColor(color)}
+                    className={`${styles.button} ${styles[cleanedColor]} ${
+                      isSelected ? styles.selected : ""
+                    }`}
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter") handleColorChange(color);
+                    }}
+                    title={color}
+                    aria-pressed={isSelected}
+                  />
+                );
+              })}
+              {remainingColors > 0 && (
+                <div
+                  className={styles.remainingIndicator}
+                  aria-label={`${remainingColors} more colors available`}
+                >
+                  +{remainingColors}
+                </div>
+              )}
+            </>
+          ) : (
+            <p>No colors available for this product.</p>
+          )}
+        </div>
       </div>
     </div>
   );

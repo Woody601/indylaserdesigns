@@ -18,13 +18,14 @@
 }
 .items {
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
   // background-color: aqua;
   background-color: inherit;
   transition: opacity 0.2s;
+  height: 65px;
   .item {
-    padding: 20px;
+    padding: 1.25rem;
   }
 }
 
@@ -34,8 +35,8 @@
   font-family: Poppins;
   font-size: 12pt;
   text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
+  // display: inline-flex;
+  // align-items: center;
   transition: transform 0.2s, color 0.2s;
   &.logo {
     padding: 12.5px;
@@ -92,15 +93,15 @@
 @media screen and (max-width: 768px) {
   .navHolder.active {
     .items {
-      transform: translate(-100%);
+      transform: translate(-320px);
     }
   }
   .items {
     height: calc(100vh - 65px);
     padding: 0;
     flex-direction: column;
-    width: 100%;
-    right: -100%;
+    width: 320px;
+    right: -320px;
     justify-content: flex-start;
     align-items: stretch;
     transition: transform 0.5s, opacity 0s;
@@ -108,7 +109,8 @@
     top: 65px;
     border-top: 1px solid #e5e5e5;
     .item {
-      border-bottom: 1px solid #e5e5e5;
+      position: relative;
+      width: -webkit-fill-available;
     }
   }
   .bars {

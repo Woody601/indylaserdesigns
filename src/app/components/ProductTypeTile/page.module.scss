@@ -1,0 +1,76 @@
+.productTile {
+  width: fit-content;
+  height: fit-content;
+  // padding: 30px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+
+  font-family: Poppins;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  padding: 6px;
+  align-items: center;
+  border: 1px solid #0000001c;
+  inset: 0px;
+
+  border-radius: 0.5rem;
+  transition: box-shadow 150ms;
+  &:hover {
+    box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.15);
+  }
+}
+
+.productName {
+  color: #000000;
+  font-weight: 500;
+  padding: 0.5rem 0;
+  // line-height: 1.25;
+}
+
+.productImagecontainer {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-basis: 40%;
+}
+.productImage {
+  width: 100%; /* Scales to container width */
+  max-width: 300px; /* Caps width at 300px */
+  max-height: 300px;
+  min-height: 120px;
+  height: 100%; /* Maintains aspect ratio */
+  object-fit: cover; /* Ensures image fills container without stretching */
+  aspect-ratio: 1 / 1;
+}
+.colorButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 300px;
+  .button {
+    width: 1rem;
+    height: 1rem;
+    padding: 0;
+    border-radius: 25%;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 2px;
+    }
+  }
+}
+.remainingIndicator {
+  font-size: 13px;
+  font-family: "Sharp Sans", Helvetica, Arial, "Trebuchet MS", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .productTile {
+    // max-width: none;
+    // width: auto;
+  }
+  .productDetails {
+  }
+}

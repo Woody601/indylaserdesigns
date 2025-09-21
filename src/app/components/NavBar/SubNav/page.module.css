@@ -1,0 +1,150 @@
+.itemDropDown {
+  background-color: inherit;
+  height: 65px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  overflow: clip;
+  -webkit-transition: height 0.25s;
+  transition: height 0.25s;
+}
+.itemDropDown.active {
+  overflow-clip-margin: 3px;
+  /* Allow content (including shadow) to extend 10px beyond the padding box */
+}
+.itemDropDown .dropDown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.itemDropDown a {
+  text-decoration: none;
+  color: #000;
+  font-family: Poppins;
+  font-size: 12pt;
+  text-transform: uppercase;
+  -webkit-transition: color 0.2s, -webkit-transform 0.2s;
+  transition: color 0.2s, -webkit-transform 0.2s;
+  transition: transform 0.2s, color 0.2s;
+  transition: transform 0.2s, color 0.2s, -webkit-transform 0.2s;
+  padding: 1.25rem 0.75rem 1.25rem 1.25rem;
+}
+.itemDropDown a:hover {
+  color: #a60303;
+}
+.itemDropDown:first-child a {
+  width: 100%;
+}
+
+.items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: inherit;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  width: 100%;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+          box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+}
+.items .item {
+  padding: 1.25rem;
+}
+
+.items a {
+  text-decoration: none;
+  color: #000;
+  font-family: Poppins;
+  font-size: 12pt;
+  text-transform: uppercase;
+  -webkit-transition: color 0.2s, -webkit-transform 0.2s;
+  transition: color 0.2s, -webkit-transform 0.2s;
+  transition: transform 0.2s, color 0.2s;
+  transition: transform 0.2s, color 0.2s, -webkit-transform 0.2s;
+  width: -webkit-fill-available;
+  padding: 1.25rem;
+}
+.items a:hover {
+  color: #a60303;
+}
+
+.block {
+  display: block;
+  cursor: pointer;
+  padding: 23.5px 20px 23.5px 0;
+  display: inline-block;
+}
+.block .arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -webkit-transition: border-color 0.2s, -webkit-transform 0.25s;
+  transition: border-color 0.2s, -webkit-transform 0.25s;
+  transition: transform 0.25s, border-color 0.2s;
+  transition: transform 0.25s, border-color 0.2s, -webkit-transform 0.25s;
+}
+.block .arrow:hover {
+  border-color: #a60303;
+}
+.block.active .arrow:nth-child(1) {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+@media screen and (max-width: 768px) {
+  .itemDropDown {
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+  }
+  .itemDropDown a {
+    max-width: 243px;
+    width: 100%;
+  }
+  .items {
+    padding: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    width: 320px;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-transition: opacity 0s, -webkit-transform 0.5s;
+    transition: opacity 0s, -webkit-transform 0.5s;
+    transition: transform 0.5s, opacity 0s;
+    transition: transform 0.5s, opacity 0s, -webkit-transform 0.5s;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    height: 500px;
+    width: 100%;
+  }
+  .items a {
+    padding: 1.25rem 2.5rem;
+  }
+  .block {
+    padding: 23.5px 18px;
+  }
+  .items.active {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
+}
