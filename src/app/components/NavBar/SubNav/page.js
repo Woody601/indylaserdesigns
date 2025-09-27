@@ -2,12 +2,15 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import styles from "./page.module.css";
 import React from "react";
-export default function SubNav({ className, children }) {
+export default function SubNav({ children }) {
   const [screenWidth, setScreenWidth] = useState(0);
   const [isToggled, setToggled] = useState(false);
-  const firstChild = React.Children.toArray(children)[0];
-  const restOfChildren = children.slice(1);
   const dropdownRef = useRef(null);
+
+  const childrenArray = React.Children.toArray(children);
+  const firstChild = childrenArray[0];
+  const restOfChildren = childrenArray.slice(1);
+
   //   // Close nav if screen size changes to desktop
   //   useEffect(() => {
   //     if (screenWidth >= 769 && isToggled) {
