@@ -132,7 +132,7 @@
 @media screen and (max-width: 768px) {
   .navHolder.active {
     .items {
-      transform: translate(-320px);
+      transform: translate(-360px);
     }
     .itemDropDown {
       .items {
@@ -140,18 +140,20 @@
       }
     }
   }
-  .items {
+  .navHolder .items {
     height: calc(100vh - 65px);
     padding: 0;
     flex-direction: column;
-    width: 320px;
-    right: -320px;
+    width: 360px;
+    right: -360px;
     justify-content: flex-start;
     align-items: stretch;
     transition: transform 0.5s, opacity 0s;
     position: absolute;
     top: 65px;
     border-top: 1px solid #e5e5e5;
+    overflow-y: auto;
+    overflow-x: hidden;
     .item {
       position: relative;
       width: -webkit-fill-available;
@@ -162,6 +164,31 @@
     display: block;
     transition: 0.5s;
   }
+  .itemDropDown {
+    overflow-clip-margin: 3px;
+    .items {
+      right: 0;
+      position: relative;
+      top: 0;
+      box-shadow: none;
+      overflow-y: clip;
+      .item {
+        padding-left: 2.5rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 359px) {
+  .navHolder.active {
+    .items {
+      transform: translate(-100%);
+    }
+  }
+  .navHolder .items {
+    width: 100%;
+    right: -100%;
+  }
+
   .itemDropDown {
     overflow-clip-margin: 3px;
     .items {

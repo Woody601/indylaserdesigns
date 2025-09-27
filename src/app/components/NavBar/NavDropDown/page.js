@@ -11,16 +11,15 @@ export default function SubNav({ children, name }) {
   const firstChild = childrenArray[0];
   const restOfChildren = childrenArray.slice(1);
 
-  //   // Close nav if screen size changes to desktop
-  //   useEffect(() => {
-  //     if (screenWidth >= 769 && isToggled) {
-  //       setToggled(false);
-  //     }
-  //   }, [screenWidth, isToggled]);
-
-  const toggleNav = () => {
+  const toggleDropDown = () => {
     setToggled(!isToggled);
   };
+  const dropDownClick = () => {
+    if (screenWidth >= 769 && isToggled) {
+      closeDropDown();
+    }
+  };
+
   const itemHeight = 65;
   const dropdownHeight = (1 + restOfChildren.length) * itemHeight + itemHeight;
 
@@ -74,12 +73,13 @@ export default function SubNav({ children, name }) {
   return (
     <>
       <div
+        ref={dropdownRef}
         className={`${styles.itemDropDown}  ${isToggled ? styles.active : ""}`}
         style={{
           height: isToggled ? `${dropdownHeight}px` : "65px",
         }}
       >
-        <div onClick={toggleNav} className={styles.item}>
+        <div onClick={toggleDropDown} className={styles.item}>
           {name}
           <div
             className={`${styles.arrowContainer}  ${
@@ -89,7 +89,10 @@ export default function SubNav({ children, name }) {
             <span className={styles.arrow}></span>
           </div>
         </div>
-        <div className={`${styles.items} ${isToggled ? styles.active : ""}`}>
+        <div
+          className={`${styles.items} ${isToggled ? styles.active : ""}`}
+          onClick={dropDownClick}
+        >
           {firstChild}
           {restOfChildren}
         </div>

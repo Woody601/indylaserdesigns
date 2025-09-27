@@ -96,12 +96,19 @@ export default function NavBar() {
             About
           </Link>
 
-          <Link href="/materials" onClick={closeNav} className={styles.item}>
-            Materials
-          </Link>
-          <Link href="/pricing" onClick={closeNav} className={styles.item}>
-            Pricing
-          </Link>
+          <SubNav name="Materials">
+            <Link href="/materials" onClick={closeNav} className={styles.item}>
+              All Materials
+            </Link>
+            <Link
+              href="/materials/#"
+              onClick={closeNav}
+              className={styles.item}
+            >
+              Wood
+            </Link>
+          </SubNav>
+
           <SubNav name="Products">
             <Link href="/products" onClick={closeNav} className={styles.item}>
               All Products
@@ -114,6 +121,9 @@ export default function NavBar() {
               Drinkware
             </Link>
           </SubNav>
+          <Link href="/pricing" onClick={closeNav} className={styles.item}>
+            Pricing
+          </Link>
           <Link href="/contact" onClick={closeNav} className={styles.item}>
             Contact
           </Link>

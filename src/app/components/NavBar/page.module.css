@@ -178,22 +178,22 @@
 
 @media screen and (max-width: 768px) {
   .navHolder.active .items {
-    -webkit-transform: translate(-320px);
-            transform: translate(-320px);
+    -webkit-transform: translate(-360px);
+            transform: translate(-360px);
   }
   .navHolder.active .itemDropDown .items {
     -webkit-transform: translatex(0);
             transform: translatex(0);
   }
-  .items {
+  .navHolder .items {
     height: calc(100vh - 65px);
     padding: 0;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    width: 320px;
-    right: -320px;
+    width: 360px;
+    right: -360px;
     -webkit-box-pack: start;
         -ms-flex-pack: start;
             justify-content: flex-start;
@@ -207,8 +207,10 @@
     position: absolute;
     top: 65px;
     border-top: 1px solid #e5e5e5;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
-  .items .item {
+  .navHolder .items .item {
     position: relative;
     width: -webkit-fill-available;
     -webkit-box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
@@ -218,6 +220,30 @@
     display: block;
     -webkit-transition: 0.5s;
     transition: 0.5s;
+  }
+  .itemDropDown {
+    overflow-clip-margin: 3px;
+  }
+  .itemDropDown .items {
+    right: 0;
+    position: relative;
+    top: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    overflow-y: clip;
+  }
+  .itemDropDown .items .item {
+    padding-left: 2.5rem;
+  }
+}
+@media screen and (max-width: 359px) {
+  .navHolder.active .items {
+    -webkit-transform: translate(-100%);
+            transform: translate(-100%);
+  }
+  .navHolder .items {
+    width: 100%;
+    right: -100%;
   }
   .itemDropDown {
     overflow-clip-margin: 3px;
