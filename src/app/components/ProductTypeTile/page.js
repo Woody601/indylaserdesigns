@@ -6,14 +6,19 @@ import styles from "./page.module.css";
 
 export default function ProductTypeTile({ typeName, typeSlug }) {
   const router = useRouter();
+
   const [imageError, setImageError] = useState(false);
 
   const handleCustomizeClick = () => {
     router.push(`/products/${typeSlug}`); // Navigate to /products/[type]
   };
 
+  const safeTypeName = typeName || "";
+  const safeTypeSlug = typeSlug || "";
+
   const getImageUrl = () => {
-    return `https://firebasestorage.googleapis.com/v0/b/indy-laser-designs.firebasestorage.app/o/productTypes%2F${typeName
+    if (!safeTypeName) return ""; // fallback to avoid crashing
+    return `https://firebasestorage.googleapis.com/v0/b/indy-laser-designs.firebasestorage.app/o/productTypes%2F${safeTypeName
       .toLowerCase()
       .replace(/\s+/g, "")}.png?alt=media`;
   };
@@ -21,25 +26,27 @@ export default function ProductTypeTile({ typeName, typeSlug }) {
   return (
     <div
       className={styles.productTile}
-      onClick={handleCustomizeClick}
+      onClick={safeTypeSlug ? handleCustomizeClick : undefined}
       role="button"
       tabIndex={0}
-      aria-label={`View ${typeName} category`}
+      aria-label={safeTypeName ? `View ${safeTypeName} category` : "Category"}
     >
-      <div className={styles.productName}>{typeName}</div>
-      {/* Product Type Image */}
+      <div className={styles.productName}>
+        {safeTypeName || "Unnamed Category"}
+      </div>
+
       <div className={styles.productImagecontainer}>
-        {imageError ? (
+        {imageError || !safeTypeName ? (
           <p>Image not available</p>
         ) : (
           <NextImage
             src={getImageUrl()}
-            alt={`${typeName} category`}
+            alt={`${safeTypeName} category`}
             width={300}
             height={300}
             className={styles.productImage}
             priority={true}
-            onError={() => setImageError(true)} // Handle image load error
+            onError={() => setImageError(true)}
           />
         )}
       </div>
