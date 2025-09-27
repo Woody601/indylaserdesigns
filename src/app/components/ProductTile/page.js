@@ -84,8 +84,10 @@ export default function ProductTile({
     1,
     Math.floor(containerWidth / (buttonWidth + gap))
   );
-  const displayedColors = colors.slice(0, maxButtons);
-  const remainingColors = colors.length - displayedColors.length;
+
+  const safeColors = colors || [];
+  const displayedColors = safeColors.slice(0, maxButtons);
+  const remainingColors = safeColors.length - displayedColors.length;
 
   const displayedColor = hoverColor || selectedColor;
 
