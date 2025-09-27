@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState, useCallback, useRef } from "react";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import React from "react";
-export default function SubNav({ children }) {
+export default function SubNav({ children, name }) {
   const [screenWidth, setScreenWidth] = useState(0);
   const [isToggled, setToggled] = useState(false);
   const dropdownRef = useRef(null);
@@ -22,9 +22,9 @@ export default function SubNav({ children }) {
     setToggled(!isToggled);
   };
   const itemHeight = 65;
-  const dropdownHeight = restOfChildren.length * itemHeight + itemHeight;
+  const dropdownHeight = (1 + restOfChildren.length) * itemHeight + itemHeight;
 
-  const closeNav = useCallback(() => {
+  const closeDropDown = useCallback(() => {
     if (isToggled) {
       setToggled(false);
     }
@@ -38,33 +38,20 @@ export default function SubNav({ children }) {
     updateScreenWidth();
     window.addEventListener("resize", updateScreenWidth);
 
-    // Handle Escape key
-    const handleKeyDown = (e) => {
-      if (screenWidth >= 769) {
-        if (e.key === "Escape" && isToggled) {
-          e.preventDefault();
-          closeNav();
-        }
-      }
-    };
-
     // // Handle Android back button
     // const handlePopState = (e) => {
     //   if (isToggled) {
     //     e.preventDefault();
-    //     closeNav();
+    //     closeDropDown();
     //     // Push the current state back to prevent actual navigation
     //     window.history.pushState(null, "", window.location.pathname);
     //   }
     // };
 
-    window.addEventListener("keydown", handleKeyDown);
-
     return () => {
       window.removeEventListener("resize", updateScreenWidth);
-      window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isToggled, closeNav]); // Add isToggled to dependency array
+  }, [isToggled, closeDropDown]); // Add isToggled to dependency array
 
   // 👇 Close when clicking outside
   useEffect(() => {
@@ -75,7 +62,7 @@ export default function SubNav({ children }) {
         dropdownRef.current &&
         !dropdownRef.current.contains(e.target)
       ) {
-        closeNav();
+        closeDropDown();
       }
     }
 
@@ -83,27 +70,27 @@ export default function SubNav({ children }) {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [screenWidth, isToggled, closeNav]);
+  }, [screenWidth, isToggled, closeDropDown]);
   return (
     <>
       <div
         className={`${styles.itemDropDown}  ${isToggled ? styles.active : ""}`}
         style={{
           height: isToggled ? `${dropdownHeight}px` : "65px",
-          transition: "height 0.3s ease",
         }}
       >
-        <div className={styles.dropDown}>
-          {firstChild}
+        <div onClick={toggleNav} className={styles.item}>
+          {name}
           <div
-            className={`${styles.block} ${isToggled ? styles.active : ""}`}
-            onClick={toggleNav}
-            ref={dropdownRef}
+            className={`${styles.arrowContainer}  ${
+              isToggled ? styles.active : ""
+            }`}
           >
             <span className={styles.arrow}></span>
           </div>
         </div>
         <div className={`${styles.items} ${isToggled ? styles.active : ""}`}>
+          {firstChild}
           {restOfChildren}
         </div>
       </div>

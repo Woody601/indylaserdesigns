@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import styles from "./page.module.css";
 import Image from "next/image";
-import SubNav from "./SubNav/page";
+import SubNav from "./NavDropDown/page";
 
 export default function NavBar() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -102,11 +102,15 @@ export default function NavBar() {
           <Link href="/pricing" onClick={closeNav} className={styles.item}>
             Pricing
           </Link>
-          <SubNav>
-            <Link href="/products" onClick={closeNav}>
-              Products
+          <SubNav name="Products">
+            <Link href="/products" onClick={closeNav} className={styles.item}>
+              All Products
             </Link>
-            <Link href="/products/drinkware" onClick={closeNav}>
+            <Link
+              href="/products/drinkware"
+              onClick={closeNav}
+              className={styles.item}
+            >
               Drinkware
             </Link>
           </SubNav>

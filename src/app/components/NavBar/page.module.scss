@@ -24,9 +24,6 @@
   background-color: inherit;
   transition: opacity 0.2s;
   height: 65px;
-  .item {
-    padding: 1.25rem;
-  }
 }
 
 .item {
@@ -35,19 +32,61 @@
   font-family: Poppins;
   font-size: 12pt;
   text-transform: uppercase;
-  // display: inline-flex;
-  // align-items: center;
+  display: inline-flex;
+  justify-content: space-between;
   transition: transform 0.2s, color 0.2s;
+  padding: 1.25rem;
+  cursor: pointer;
+
   &.logo {
     padding: 12.5px;
-
     // padding: 7.5px 15px;
   }
   &:hover {
     color: #a60303;
+    .arrow {
+      border-color: #a60303;
+    }
   }
 }
-
+.itemDropDown {
+  background-color: inherit;
+  height: 65px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: start;
+  overflow: clip;
+  transition: height 0.25s;
+  user-select: none;
+  &.active {
+    overflow-clip-margin: 3px;
+    /* Allow content (including shadow) to extend 10px beyond the padding box */
+  }
+  .item {
+    width: -webkit-fill-available;
+  }
+  .items {
+    box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+    flex-direction: column;
+    height: auto;
+  }
+}
+.arrowContainer {
+  display: inline-block;
+  .arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transition: transform 0.25s, border-color 0.2s;
+  }
+  &.active .arrow:nth-child(1) {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+}
 .bars {
   display: none;
   cursor: pointer;
@@ -95,6 +134,11 @@
     .items {
       transform: translate(-320px);
     }
+    .itemDropDown {
+      .items {
+        transform: translatex(0);
+      }
+    }
   }
   .items {
     height: calc(100vh - 65px);
@@ -111,10 +155,23 @@
     .item {
       position: relative;
       width: -webkit-fill-available;
+      box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
     }
   }
   .bars {
     display: block;
     transition: 0.5s;
+  }
+  .itemDropDown {
+    overflow-clip-margin: 3px;
+    .items {
+      right: 0;
+      position: relative;
+      top: 0;
+      box-shadow: none;
+      .item {
+        padding-left: 2.5rem;
+      }
+    }
   }
 }
