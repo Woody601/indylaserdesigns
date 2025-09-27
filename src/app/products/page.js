@@ -26,7 +26,11 @@ export default async function Products() {
       <div className={styles.products}>
         {products.length > 0 ? (
           products.map((product) => (
-            <ProductTypeTile typeName={product.name} typeSlug={product.slug} />
+            <ProductTypeTile
+              typeName={product.name}
+              typeSlug={product.slug}
+              key={product.id}
+            />
           ))
         ) : (
           <p>No products available.</p>
