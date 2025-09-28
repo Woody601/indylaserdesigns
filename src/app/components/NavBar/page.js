@@ -97,8 +97,26 @@ export default function NavBar() {
           </Link>
 
           <SubNav name="Materials">
-            <Link href="/materials" onClick={closeNav} className={styles.item}>
-              All Materials
+            <Link
+              href="/materials/#"
+              onClick={closeNav}
+              className={styles.item}
+            >
+              Acrylic
+            </Link>
+            <Link
+              href="/materials/#"
+              onClick={closeNav}
+              className={styles.item}
+            >
+              Leather
+            </Link>
+            <Link
+              href="/materials/#"
+              onClick={closeNav}
+              className={styles.item}
+            >
+              Metal
             </Link>
             <Link
               href="/materials/#"
@@ -106,6 +124,9 @@ export default function NavBar() {
               className={styles.item}
             >
               Wood
+            </Link>
+            <Link href="/materials" onClick={closeNav} className={styles.item}>
+              All Materials
             </Link>
           </SubNav>
 
