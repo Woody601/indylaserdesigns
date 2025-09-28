@@ -78,8 +78,8 @@ export default function ProductTile({
   };
 
   // Calculate number of buttons that fit in one row
-  const buttonWidth = containerWidth <= 768 ? 24 : 16; // Match CSS
-  const gap = containerWidth <= 768 ? 8 : 8; // Match CSS
+  const buttonWidth = containerWidth <= 689 ? 24 : 16; // Match CSS
+  const gap = containerWidth <= 689 ? 8 : 8; // Match CSS
   const maxButtons = Math.max(
     1,
     Math.floor(containerWidth / (buttonWidth + gap))

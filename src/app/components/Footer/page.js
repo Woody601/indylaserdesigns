@@ -10,7 +10,7 @@ export default function Footer() {
           <br />
           <Link href="tel:317-313-7715">317-313-7715</Link>
           <br />
-          <Link href="mailto:info@indylaserdesigns.com">
+          <Link href="mailto:indylaserdesigns@gmail.com">
             indylaserdesigns@gmail.com
           </Link>
         </section>

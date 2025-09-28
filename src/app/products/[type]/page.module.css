@@ -1,11 +1,18 @@
 .products {
   display: -ms-grid;
   display: grid;
-  gap: 1.5rem;
+  gap: 2.5rem 1.5rem;
   max-width: 1314px;
-  width: -webkit-fill-available;
   margin: auto;
   padding: 1rem;
+  justify-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: Poppins;
+}
+.products p {
+  font-size: 1rem;
 }
 
 .header {
@@ -16,30 +23,37 @@
   margin: 1rem auto;
 }
 
-/* Large screens: 3 columns */
-@media screen and (min-width: 840px) {
+/* Large screens: 4 columns */
+@media screen and (min-width: 1346px) {
   .products {
-    -ms-grid-columns: (1fr)[3];
-    grid-template-columns: repeat(3, 1fr);
+    -ms-grid-columns: (1fr)[4];
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* Large screens: 3 columns */
+@media screen and (max-width: 1345px) and (min-width: 1028px) {
+  .products {
+    -ms-grid-columns: (316px)[3];
+    grid-template-columns: repeat(3, 316px);
     font-size: 20px;
   }
 }
 /* Medium screens: 2 columns */
-@media screen and (max-width: 839px) and (min-width: 769px) {
+@media screen and (max-width: 1027px) and (min-width: 688px) {
   .products {
-    -ms-grid-columns: (1fr)[2];
-    grid-template-columns: repeat(2, 1fr);
+    -ms-grid-columns: (316px)[2];
+    grid-template-columns: repeat(2, 316px);
   }
 }
 /* Small screens: 1 column */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 687px) {
   .products {
     -ms-grid-columns: (1fr)[1];
     grid-template-columns: repeat(1, 1fr);
     font-size: 17px;
   }
   .products {
-    padding: 0;
+    padding: 1rem 0;
   }
   .header {
     padding: 0 0.5rem;

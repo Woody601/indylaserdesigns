@@ -177,6 +177,20 @@
 }
 
 @media screen and (max-width: 768px) {
+  .colorButtons {
+    max-width: 287px;
+  }
+  .colorButtons .button {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .remainingIndicator {
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+  }
+}
+@media screen and (max-width: 687px) {
   .productTile {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
@@ -196,16 +210,7 @@
   .productDetails {
     width: 60%;
   }
-  .remainingIndicator {
-    font-size: 14px;
-    width: 24px;
-    height: 24px;
-  }
   .colorButtons {
     max-width: 184px;
-  }
-  .colorButtons .button {
-    width: 1.5rem;
-    height: 1.5rem;
   }
 }

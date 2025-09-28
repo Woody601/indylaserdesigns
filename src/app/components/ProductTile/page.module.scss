@@ -131,6 +131,20 @@
   background-color: black;
 }
 @media screen and (max-width: 768px) {
+  .colorButtons {
+    max-width: 287px;
+    .button {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  .remainingIndicator {
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+  }
+}
+@media screen and (max-width: 687px) {
   .productTile {
     flex-direction: row;
     max-width: none;
@@ -146,16 +160,7 @@
   .productDetails {
     width: 60%;
   }
-  .remainingIndicator {
-    font-size: 14px;
-    width: 24px;
-    height: 24px;
-  }
   .colorButtons {
     max-width: 184px;
-    .button {
-      width: 1.5rem;
-      height: 1.5rem;
-    }
   }
 }
