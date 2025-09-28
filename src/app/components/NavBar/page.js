@@ -98,28 +98,28 @@ export default function NavBar() {
 
           <SubNav name="Materials">
             <Link
-              href="/materials/#"
+              href="/materials/acrylic"
               onClick={closeNav}
               className={styles.item}
             >
               Acrylic
             </Link>
             <Link
-              href="/materials/#"
+              href="/materials/leather"
               onClick={closeNav}
               className={styles.item}
             >
               Leather
             </Link>
             <Link
-              href="/materials/#"
+              href="/materials/metal"
               onClick={closeNav}
               className={styles.item}
             >
               Metal
             </Link>
             <Link
-              href="/materials/#"
+              href="/materials/wood "
               onClick={closeNav}
               className={styles.item}
             >

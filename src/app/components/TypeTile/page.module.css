@@ -1,4 +1,4 @@
-.productTile {
+.tile {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
@@ -28,18 +28,18 @@
   transition: box-shadow 150ms;
   transition: box-shadow 150ms, -webkit-box-shadow 150ms;
 }
-.productTile:hover {
+.tile:hover {
   -webkit-box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.15);
           box-shadow: 0px 4px 8px 0 rgba(0, 0, 0, 0.15);
 }
 
-.productName {
+.name {
   color: #000000;
   font-weight: 500;
   padding: 0.5rem 0;
 }
 
-.productImagecontainer {
+.imageContainer {
   aspect-ratio: 1/1;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -48,7 +48,7 @@
       flex-basis: 40%;
 }
 
-.productImage {
+.image {
   width: 100%; /* Scales to container width */
   max-width: 300px; /* Caps width at 300px */
   max-height: 300px;
@@ -57,39 +57,4 @@
   -o-object-fit: cover;
      object-fit: cover; /* Ensures image fills container without stretching */
   aspect-ratio: 1/1;
-}
-
-.colorButtons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  gap: 0.5rem;
-  max-width: 300px;
-}
-.colorButtons .button {
-  width: 1rem;
-  height: 1rem;
-  padding: 0;
-  border-radius: 25%;
-}
-.colorButtons .button:hover {
-  -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 2px;
-          box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 2px;
-}
-
-.remainingIndicator {
-  font-size: 13px;
-  font-family: "Sharp Sans", Helvetica, Arial, "Trebuchet MS", sans-serif;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  width: 16px;
 }

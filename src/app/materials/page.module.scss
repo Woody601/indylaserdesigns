@@ -1,6 +1,38 @@
-.pricing {
-  font-family: Poppins;
-  position: inherit;
-  max-width: 75vw;
+.products {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  max-width: 1314px;
   margin: auto;
+}
+
+.header {
+  padding: 0 1rem;
+  max-width: 1314px;
+  font-family: Poppins;
+  font-weight: 600;
+  margin: 1rem auto;
+}
+
+/* Large screens: 4 columns */
+@media screen and (min-width: 840px) {
+  .products {
+    grid-template-columns: repeat(4, 1fr);
+    font-size: 20px;
+  }
+}
+
+/* Medium screens: 3 columns */
+@media screen and (max-width: 839px) and (min-width: 500px) {
+  .products {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Small screens: 2 columns */
+@media screen and (max-width: 499px) {
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 17px;
+  }
 }

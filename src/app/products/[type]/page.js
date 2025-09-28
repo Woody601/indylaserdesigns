@@ -1,15 +1,14 @@
 // app/products/[type]/page.js
+import { notFound } from "next/navigation"; // Import notFound
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import styles from "./page.module.css";
 import ProductTile from "../../components/ProductTile/page";
 
 export async function generateMetadata({ params }) {
-  // Await params first
   const awaitedParams = await params;
   const { type } = awaitedParams;
 
-  // Fetch product types to get display name
   let typeName = type; // fallback
   try {
     const snapshot = await getDocs(collection(db, "productTypes"));
@@ -37,8 +36,13 @@ export default async function Types({ params }) {
     const productTypeSnapshot = await getDocs(collection(db, "productTypes"));
     const types = productTypeSnapshot.docs.map((doc) => doc.data());
     productTypeData = types.find((t) => t.slug === type);
+
+    // Check if product type is invalid
+    if (!productTypeData) {
+      notFound(); // Trigger 404 page if no matching type is found
+    }
   } catch (error) {
-    console.error("Error fetching product types:", error.message);
+    notFound(); // Optionally trigger 404 on error
   }
 
   // Fetch all products and filter by type

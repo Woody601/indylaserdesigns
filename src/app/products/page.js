@@ -3,7 +3,7 @@
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase";
 import styles from "./page.module.css";
-import ProductTypeTile from "../components/ProductTypeTile/page";
+import TypeTile from "../components/TypeTile/page";
 export const metadata = {
   title: "Products – Indy Laser Designs",
 };
@@ -26,10 +26,12 @@ export default async function Products() {
       <div className={styles.products}>
         {products.length > 0 ? (
           products.map((product) => (
-            <ProductTypeTile
+            <TypeTile
               typeName={product.name}
               typeSlug={product.slug}
               key={product.id}
+              imgType={"png"}
+              tileType={"product"}
             />
           ))
         ) : (
