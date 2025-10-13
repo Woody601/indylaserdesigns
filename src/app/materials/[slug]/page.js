@@ -2,6 +2,7 @@ import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/app/firebase";
 import styles from "./page.module.css";
 import { notFound } from "next/navigation";
+import NextImage from "next/image";
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -12,7 +13,7 @@ export async function generateMetadata({ params }) {
 
   let material = null;
   try {
-    const q = query(collection(db, "materials"), where("slug", "==", slug));
+    const q = query(collection(db, "materialTypes"), where("slug", "==", slug));
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
@@ -36,12 +37,12 @@ export default async function MaterialPage({ params }) {
   const { slug } = await params;
 
   if (!slug) {
-    notFound(); // 👈 trigger Next.js 404 page
+    notFound();
   }
 
   let material = null;
   try {
-    const q = query(collection(db, "materials"), where("slug", "==", slug));
+    const q = query(collection(db, "materialTypes"), where("slug", "==", slug));
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
@@ -52,14 +53,35 @@ export default async function MaterialPage({ params }) {
   }
 
   if (!material) {
-    notFound(); // 👈 trigger 404 if slug not found in Firestore
+    notFound();
   }
+  const { name, description, imgType, tileType } = material;
+  const safeTypeName = name || "";
+  const safeTileType = tileType || "material"; // fallback if missing
+  const safeImgType = imgType || "webp"; // fallback if missing
 
-  const { name, description } = material;
+  const getImageUrl = () => {
+    if (!safeTypeName) return "";
+    return `https://firebasestorage.googleapis.com/v0/b/indy-laser-designs.firebasestorage.app/o/${safeTileType}Types%2F${safeTypeName
+      .toLowerCase()
+      .replace(/\s+/g, "")}.jpg?alt=media`;
+  };
 
   return (
-    <div className={styles.customizePage}>
-      <h1>{name}</h1>
+    <div className={styles.materialInfo}>
+      <h1 className={styles.header}>{name}</h1>
+
+      <div className={styles.imageContainer}>
+        <NextImage
+          src={getImageUrl()}
+          alt={`${safeTypeName} category`}
+          width={300}
+          height={300}
+          className={styles.image}
+          priority={true}
+        />
+      </div>
+
       {description && <p>{description}</p>}
     </div>
   );

@@ -1,0 +1,77 @@
+.colorButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .button {
+    padding: 0;
+    border-radius: 25%;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 0px 2px;
+      cursor: pointer;
+    }
+  }
+}
+.remainingIndicator {
+  font-size: 13px;
+  font-family: "Sharp Sans", Helvetica, Arial, "Trebuchet MS", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+}
+
+.coral {
+  background-color: #f27069;
+}
+.red {
+  background-color: #d42027;
+}
+.maroon {
+  background-color: maroon;
+}
+.orange {
+  background-color: #ff6600;
+}
+.yellow {
+  background-color: #ffd23c;
+}
+.green {
+  background-color: #009a22;
+}
+.teal {
+  background-color: #9ad1c5;
+}
+.lightblue {
+  background-color: #9ccad2;
+}
+.royalblue {
+  background-color: #3961a1;
+}
+.navyblue {
+  background-color: #3f3e55;
+}
+.lightpurple {
+  background-color: #e397c1;
+}
+.purple {
+  background-color: #4c4178;
+}
+.pink {
+  background-color: #f27fae;
+}
+.white {
+  background-color: #fff;
+  border: 1px solid rgb(227, 227, 227);
+  mix-blend-mode: darken;
+  margin: 0 -1px;
+}
+.stainlesssteel {
+  background-color: darkgray;
+}
+.darkgrey {
+  background-color: #7a7a7a;
+}
+.black {
+  background-color: black;
+}

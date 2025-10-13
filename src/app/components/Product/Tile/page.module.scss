@@ -1,0 +1,55 @@
+@import "../product.scss";
+.colorButtons {
+  max-width: none;
+  .button {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+.productTile {
+  width: fit-content;
+  max-width: 344px;
+  height: fit-content;
+  // padding: 30px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: Poppins;
+  text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition-duration: 150ms;
+}
+.productDetails {
+  flex: 1 1 0%;
+}
+
+.productImagecontainer {
+  box-shadow: rgb(245, 245, 245) 0px 0px 60px 24px inset;
+  inset: 0px;
+  mix-blend-mode: darken;
+  border-radius: 0.5rem;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-basis: 40%;
+  max-width: 360px; /* Caps width at 360px */
+  max-height: 360px;
+}
+.productImage {
+  width: 100%; /* Scales to container width */
+  max-width: 360px; /* Caps width at 360px */
+  max-height: 360px;
+  min-height: 120px;
+  height: 100%; /* Maintains aspect ratio */
+  object-fit: cover; /* Ensures image fills container without stretching */
+  aspect-ratio: 1 / 1;
+}
+
+.productColorText {
+  text-transform: none;
+  span {
+    font-weight: 600;
+  }
+}

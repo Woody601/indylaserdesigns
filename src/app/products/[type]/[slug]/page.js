@@ -1,6 +1,7 @@
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { db } from "@/app/firebase";
 import styles from "./page.module.css";
+import ProductTile from "@/app/components/Product/Tile/page";
 
 export async function generateMetadata({ params }) {
   const awaitedParams = await params; // ✅ await first
@@ -48,24 +49,15 @@ export default async function CustomizePage({ params }) {
   const { name, colors = [] } = product;
 
   return (
-    <div className={styles.customizePage}>
-      <h1>{name}</h1>
-
-      <div className={styles.colorGrid}>
-        {colors.map((color) => {
-          const colorSlug = color.toLowerCase().replace(/\s+/g, "");
-          const imageUrl = `https://firebasestorage.googleapis.com/v0/b/indy-laser-designs.firebasestorage.app/o/products%2F${name
-            .toLowerCase()
-            .replace(/\s+/g, "")}%2F${colorSlug}.png?alt=media`;
-
-          return (
-            <div key={colorSlug} className={styles.colorItem}>
-              <img src={imageUrl} alt={`${name} - ${color}`} width={200} />
-              <p>{color}</p>
-            </div>
-          );
-        })}
-      </div>
+    <div className={styles.productInfo}>
+      <h1 className={styles.header}>{name}</h1>
+      <ProductTile
+        key={product.id}
+        productTitle={product.name}
+        colors={product.colors}
+        productSlug={product.slug}
+        productType={product.type}
+      />
     </div>
   );
 }

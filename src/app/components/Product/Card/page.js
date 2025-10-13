@@ -4,7 +4,7 @@ import NextImage from "next/image";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 
-export default function ProductTile({
+export default function ProductCard({
   productTitle,
   colors,
   productSlug,

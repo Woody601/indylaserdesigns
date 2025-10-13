@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"; // Import notFound
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
 import styles from "./page.module.css";
-import ProductTile from "../../components/ProductTile/page";
+import ProductCard from "@/app/components/Product/Card/page";
 
 export async function generateMetadata({ params }) {
   const awaitedParams = await params;
@@ -63,7 +63,7 @@ export default async function Types({ params }) {
       <div className={styles.products}>
         {products.length > 0 ? (
           products.map((product) => (
-            <ProductTile
+            <ProductCard
               key={product.id}
               productTitle={product.name}
               colors={product.colors}

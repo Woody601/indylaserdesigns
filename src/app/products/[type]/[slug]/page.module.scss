@@ -1,18 +1,16 @@
 .productInfo {
-  display: -ms-grid;
   display: grid;
   max-width: 1314px;
+  // width: -webkit-fill-available;
   margin: auto auto 2rem;
+  //   padding: 1rem;
   justify-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   font-family: Poppins;
+  p {
+    font-size: 1rem;
+  }
 }
-.productInfo p {
-  font-size: 1rem;
-}
-
 .header {
   padding: 0 1rem;
   max-width: 1314px;
