@@ -29,9 +29,9 @@
 }
 
 .imageContainer {
-  aspect-ratio: 1 / 1;
-  display: flex;
+  padding: 0.5rem;
   flex-basis: 40%;
+  display: flex;
 }
 .image {
   width: 100%; /* Scales to container width */

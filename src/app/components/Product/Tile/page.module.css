@@ -102,6 +102,14 @@
   background-color: black;
 }
 
+.gray {
+  background-color: gray;
+}
+
+.olivegreen {
+  background-color: #6d744b;
+}
+
 .colorButtons {
   max-width: none;
 }

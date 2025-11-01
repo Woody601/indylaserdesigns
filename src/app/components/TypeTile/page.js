@@ -37,7 +37,6 @@ export default function TypeTile({ typeName, typeSlug, imgType, tileType }) {
         {imageError || !safeTypeName ? (
           <>
             <p>Image not available</p>
-            <p>{getImageUrl()}</p>
           </>
         ) : (
           <NextImage

@@ -53,9 +53,6 @@
     font-size: 17px;
   }
   .products {
-    padding: 1rem 0;
-  }
-  .header {
-    padding: 0 0.5rem;
+    padding: 1rem 0.75rem;
   }
 }

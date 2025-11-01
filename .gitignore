@@ -38,3 +38,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+src/app/api/jds/route.js
+src/app/api/jds-sync/route.js
+src/app/api/syncFromCSV/route.js
+Polar-Camels-Price-List.csv

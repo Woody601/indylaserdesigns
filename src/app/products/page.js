@@ -11,7 +11,7 @@ export const metadata = {
 export default async function Products() {
   let products = [];
   try {
-    const productSnapshot = await getDocs(collection(db, "productTypes"));
+    const productSnapshot = await getDocs(collection(db, "products"));
     products = productSnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),

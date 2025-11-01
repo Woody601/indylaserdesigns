@@ -134,6 +134,13 @@ export default function NavBar() {
             <Link href="/products" onClick={closeNav} className={styles.item}>
               All Products
             </Link>
+            {/* <Link
+              href="/products/coasters"
+              onClick={closeNav}
+              className={styles.item}
+            >
+              Coasters
+            </Link> */}
             <Link
               href="/products/drinkware"
               onClick={closeNav}
@@ -141,6 +148,13 @@ export default function NavBar() {
             >
               Drinkware
             </Link>
+            {/* <Link
+              href="/products/petbowls"
+              onClick={closeNav}
+              className={styles.item}
+            >
+              Pet Bowls
+            </Link> */}
           </SubNav>
           <Link href="/pricing" onClick={closeNav} className={styles.item}>
             Pricing

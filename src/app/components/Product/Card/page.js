@@ -4,156 +4,134 @@ import NextImage from "next/image";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
 
+// helper functions
+const getColorName = (c) =>
+  typeof c === "string" ? c : c?.name ?? c?.id ?? "";
+
+const getColorId = (c, idx = 0) =>
+  typeof c === "string" ? c : c?.id ?? c?.name ?? String(idx);
+
+const getBigImg = (c) => (typeof c === "object" ? c?.bigimg ?? null : null);
+
+const getCssClassFromColor = (c) => {
+  const name = getColorName(c);
+  return name ? name.toLowerCase().replace(/\s+/g, "") : "";
+};
+
 export default function ProductCard({
   productTitle,
-  colors,
+  colors = [], // now [{id, name, bigimg, smallimg}]
   productSlug,
   productType,
+  images = {}, // optional legacy image map
 }) {
   const router = useRouter();
   const [containerWidth, setContainerWidth] = useState(0);
   const containerRef = useRef(null);
 
-  const combinedColorNames = (colors || []).map((color) =>
-    color.toLowerCase().replace(/\s+/g, "")
-  );
-
   const [selectedColor, setSelectedColor] = useState(
-    (colors || []).length > 0 ? colors[0] : null
+    colors?.length ? colors[0] : null
   );
-
   const [hoverColor, setHoverColor] = useState(null);
+  const activeColor = hoverColor || selectedColor;
 
-  // Preload all color images
-  useEffect(() => {
-    combinedColorNames.forEach((colorName) => {
-      const img = new window.Image();
-      const url = `https://firebasestorage.googleapis.com/v0/b/indy-laser-designs.firebasestorage.app/o/products%2F${productTitle
-        .toLowerCase()
-        .replace(/\s+/g, "")}%2F${colorName}.png?alt=media`;
-      img.src = url;
-    });
-  }, [productTitle, combinedColorNames]);
+  // ✅ choose display image (from bigimg or fallback)
+  const pickImage = () => {
+    const big = getBigImg(activeColor);
+    if (big) return big;
+    const name = getColorName(activeColor);
+    if (name && images[name]) return images[name];
+    const firstBig = colors.find((c) => getBigImg(c));
+    if (firstBig) return getBigImg(firstBig);
+    const vals = Object.values(images || {});
+    return vals.length ? vals[0] : null;
+  };
 
-  // Update container width on mount, resize, and layout changes
+  const displayedImage = pickImage();
+
+  // Responsive layout tracking
   useEffect(() => {
     const updateWidth = () => {
-      if (containerRef.current) {
-        const width = containerRef.current.getBoundingClientRect().width;
-        setContainerWidth(width);
-      }
+      if (containerRef.current)
+        setContainerWidth(containerRef.current.offsetWidth);
     };
-
     updateWidth();
-    window.addEventListener("resize", updateWidth);
-
-    // Use ResizeObserver for dynamic layout changes
     const observer = new ResizeObserver(updateWidth);
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
+    if (containerRef.current) observer.observe(containerRef.current);
+    window.addEventListener("resize", updateWidth);
     return () => {
       window.removeEventListener("resize", updateWidth);
-      if (containerRef.current) {
-        observer.unobserve(containerRef.current);
-      }
+      observer.disconnect();
     };
   }, []);
 
-  const handleColorChange = (name) => {
-    setSelectedColor(name);
-  };
-
-  const handleCustomizeClick = () => {
-    router.push(`${productType}/${productSlug}`);
-  };
-
-  const getImageUrl = (color) => {
-    return `https://firebasestorage.googleapis.com/v0/b/indy-laser-designs.firebasestorage.app/o/products%2F${productTitle
-      .toLowerCase()
-      .replace(/\s+/g, "")}%2F${color
-      .toLowerCase()
-      .replace(/\s+/g, "")}.png?alt=media`;
-  };
-
-  // Calculate number of buttons that fit in one row
-  const buttonWidth = containerWidth <= 689 ? 24 : 16; // Match CSS
-  const gap = containerWidth <= 689 ? 8 : 8; // Match CSS
+  const buttonWidth = containerWidth <= 689 ? 24 : 16;
+  const gap = 8;
   const maxButtons = Math.max(
     1,
     Math.floor(containerWidth / (buttonWidth + gap))
   );
+  const displayedColors = (colors || []).slice(0, maxButtons);
+  const remainingColors = (colors?.length || 0) - displayedColors.length;
 
-  const safeColors = colors || [];
-  const displayedColors = safeColors.slice(0, maxButtons);
-  const remainingColors = safeColors.length - displayedColors.length;
-
-  const displayedColor = hoverColor || selectedColor;
+  const handleCustomizeClick = () =>
+    // router.push(`${productType}/${productSlug}`);
+    console.log("Not sending to the product page yet.");
 
   return (
     <div className={styles.productTile} onClick={handleCustomizeClick}>
-      {/* Product Image */}
       <div className={styles.productImagecontainer}>
-        {displayedColor ? (
+        {displayedImage ? (
           <NextImage
-            src={getImageUrl(displayedColor)}
-            alt={`${displayedColor} tumbler`}
+            src={displayedImage}
+            alt={`${getColorName(activeColor) || productTitle} image`}
             width={300}
             height={300}
             className={styles.productImage}
-            priority={true}
+            priority
           />
         ) : (
           <p>No image available</p>
         )}
       </div>
+      <div className={styles.productName}>{productTitle}</div>
 
-      <div className={styles.productDetails}>
-        {/* Product Name */}
-        <div className={styles.productName}>{productTitle}</div>
-        {/* Color Buttons */}
-        <div className={styles.colorButtons} ref={containerRef}>
-          {(displayedColors || []).length > 0 ? (
-            <>
-              {displayedColors.map((color) => {
-                const cleanedColor = color.toLowerCase().replace(/\s+/g, "");
-                const isSelected = selectedColor === color;
+      <div className={styles.colorButtons} ref={containerRef}>
+        {displayedColors.length > 0 ? (
+          <>
+            {displayedColors.map((c, idx) => {
+              const id = getColorId(c, idx);
+              const name = getColorName(c);
+              const colorClass = getCssClassFromColor(c);
+              const isSelected = selectedColor === c;
 
-                return (
-                  <div
-                    key={cleanedColor}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleColorChange(color);
-                    }}
-                    onMouseEnter={() => setHoverColor(color)}
-                    className={`${styles.button} ${styles[cleanedColor]} ${
-                      isSelected ? styles.selected : ""
-                    }`}
-                    role="button"
-                    tabIndex={0}
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") handleColorChange(color);
-                    }}
-                    title={color}
-                    aria-pressed={isSelected}
-                  />
-                );
-              })}
-              {remainingColors > 0 && (
+              return (
                 <div
-                  className={styles.remainingIndicator}
-                  aria-label={`${remainingColors} more colors available`}
-                >
-                  +{remainingColors}
-                </div>
-              )}
-            </>
-          ) : (
-            <p>No colors available for this product.</p>
-          )}
-        </div>
+                  key={id}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedColor(c);
+                  }}
+                  onMouseEnter={() => setHoverColor(c)}
+                  onMouseLeave={() => setHoverColor(null)}
+                  className={`${styles.button} ${
+                    colorClass && styles[colorClass] ? styles[colorClass] : ""
+                  } ${isSelected ? styles.selected : ""}`}
+                  role="button"
+                  tabIndex={0}
+                  title={name}
+                />
+              );
+            })}
+            {remainingColors > 0 && (
+              <div className={styles.remainingIndicator}>
+                +{remainingColors}
+              </div>
+            )}
+          </>
+        ) : (
+          <p>No colors available</p>
+        )}
       </div>
     </div>
   );

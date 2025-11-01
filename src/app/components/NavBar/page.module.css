@@ -83,8 +83,6 @@
       -ms-flex-align: start;
           align-items: start;
   overflow: clip;
-  -webkit-transition: height 0.25s;
-  transition: height 0.25s;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -220,6 +218,8 @@
   }
   .itemDropDown {
     overflow-clip-margin: 3px;
+    -webkit-transition: height 0.25s;
+    transition: height 0.25s;
   }
   .itemDropDown .items {
     right: 0;

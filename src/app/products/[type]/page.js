@@ -1,78 +1,104 @@
-// app/products/[type]/page.js
-import { notFound } from "next/navigation"; // Import notFound
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { notFound } from "next/navigation";
 import styles from "./page.module.css";
-import ProductCard from "@/app/components/Product/Card/page";
+import ProductCard from "../../components/Product/Card/page";
 
 export async function generateMetadata({ params }) {
-  const awaitedParams = await params;
-  const { type } = awaitedParams;
+  const { type } = await params;
+  let typeName = type;
 
-  let typeName = type; // fallback
   try {
-    const snapshot = await getDocs(collection(db, "productTypes"));
-    const types = snapshot.docs.map((doc) => doc.data());
-    const matchedType = types.find((t) => t.slug === type);
-    if (matchedType) typeName = matchedType.name;
+    const typeDoc = await getDoc(doc(db, "products", type));
+    if (typeDoc.exists()) typeName = typeDoc.data().name || type;
   } catch (error) {
-    console.error("Error fetching product types:", error.message);
+    console.error("Error fetching product type:", error.message);
   }
 
-  return {
-    title: `${typeName} – Indy Laser Designs`,
-  };
+  return { title: `${typeName} – Indy Laser Designs` };
 }
 
-export default async function Types({ params }) {
-  const awaitedParams = await params;
-  const { type } = awaitedParams;
+export default async function ProductTypePage({ params }) {
+  const { type } = await params;
+  let typeName = type;
 
-  let products = [];
-  let productTypeData = null;
-
-  // Fetch all product types and find matching slug
+  // Verify that the product type exists
   try {
-    const productTypeSnapshot = await getDocs(collection(db, "productTypes"));
-    const types = productTypeSnapshot.docs.map((doc) => doc.data());
-    productTypeData = types.find((t) => t.slug === type);
-
-    // Check if product type is invalid
-    if (!productTypeData) {
-      notFound(); // Trigger 404 page if no matching type is found
-    }
+    const typeDoc = await getDoc(doc(db, "products", type));
+    if (!typeDoc.exists()) notFound();
+    typeName = typeDoc.data().name || type;
   } catch (error) {
-    notFound(); // Optionally trigger 404 on error
+    console.error("Error fetching product type:", error.message);
+    notFound();
   }
 
-  // Fetch all products and filter by type
+  // Fetch all items in this product type
+  let items = [];
   try {
-    const productSnapshot = await getDocs(collection(db, "products"));
-    products = productSnapshot.docs
-      .map((doc) => ({ id: doc.id, ...doc.data() }))
-      .filter((product) => product.type === type);
+    const snapshot = await getDocs(collection(db, "products", type, "items"));
+    items = snapshot.docs.map((d) => ({ id: d.id, ...d.data() }));
   } catch (error) {
-    console.error("Error fetching products:", error.message);
+    console.error("Error fetching items:", error.message);
   }
+
+  // For each item, fetch its color subcollection
+  const itemsWithColors = await Promise.all(
+    items.map(async (item) => {
+      try {
+        const colorsSnap = await getDocs(
+          collection(db, "products", type, "items", item.id, "colors")
+        );
+        const colors = colorsSnap.docs.map((c) => {
+          const data = c.data() || {};
+          return {
+            id: c.id,
+            name: data.name || c.id, // if no name field, fallback to doc id
+            smallimg: data.smallimg || null,
+            bigimg: data.bigimg || null,
+          };
+        });
+        return { ...item, colors };
+      } catch (error) {
+        console.error(`Error fetching colors for ${item.id}:`, error.message);
+        return { ...item, colors: [] };
+      }
+    })
+  );
+
+  // Shape data for ProductCard
+  const products = itemsWithColors.map((item) => {
+    const productTitle = item.name || "Untitled Product";
+    const productSlug =
+      item.slug ||
+      productTitle
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    return {
+      productTitle,
+      productSlug,
+      productType: type,
+      colors: item.colors, // [{id, name, smallimg, bigimg}]
+    };
+  });
 
   return (
     <>
-      <h1 className={styles.header}>
-        {productTypeData ? productTypeData.name : type}
-      </h1>
+      <h1 className={styles.header}>{typeName}</h1>
+
       <div className={styles.products}>
-        {products.length > 0 ? (
-          products.map((product) => (
+        {products.length ? (
+          products.map((p) => (
             <ProductCard
-              key={product.id}
-              productTitle={product.name}
-              colors={product.colors}
-              productSlug={product.slug}
-              productType={product.type}
+              key={p.productSlug}
+              productTitle={p.productTitle}
+              productSlug={p.productSlug}
+              productType={p.productType}
+              colors={p.colors}
             />
           ))
         ) : (
-          <p>No products available.</p>
+          <p>No items available.</p>
         )}
       </div>
     </>
