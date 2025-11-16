@@ -45,6 +45,9 @@
 .lightblue {
   background-color: #9ccad2;
 }
+.blue {
+  background-color: blue;
+}
 .royalblue {
   background-color: #3961a1;
 }
@@ -66,13 +69,19 @@
   mix-blend-mode: darken;
   margin: 0 -1px;
 }
-.stainlesssteel {
+.stainlesssteel,
+.brushedsilver {
   background-color: darkgray;
 }
-.darkgrey {
+
+.silver {
+  background-color: silver;
+}
+.darkgray {
   background-color: #7a7a7a;
 }
-.black {
+.black,
+.matteblack {
   background-color: black;
 }
 .gray {
@@ -80,4 +89,7 @@
 }
 .olivegreen {
   background-color: #6d744b;
+}
+.brown {
+  background-color: brown;
 }

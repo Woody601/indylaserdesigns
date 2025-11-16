@@ -75,8 +75,7 @@ export default function ProductCard({
   const remainingColors = (colors?.length || 0) - displayedColors.length;
 
   const handleCustomizeClick = () =>
-    // router.push(`${productType}/${productSlug}`);
-    console.log("Not sending to the product page yet.");
+    router.push(`${productType}/${productSlug}`);
 
   return (
     <div className={styles.productTile} onClick={handleCustomizeClick}>
@@ -113,7 +112,7 @@ export default function ProductCard({
                     setSelectedColor(c);
                   }}
                   onMouseEnter={() => setHoverColor(c)}
-                  onMouseLeave={() => setHoverColor(null)}
+                  onMouseLeave={() => setHoverColor(c)}
                   className={`${styles.button} ${
                     colorClass && styles[colorClass] ? styles[colorClass] : ""
                   } ${isSelected ? styles.selected : ""}`}

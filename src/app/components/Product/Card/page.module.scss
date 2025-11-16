@@ -9,7 +9,8 @@
 .productTile {
   width: fit-content;
   max-width: 300px;
-  height: fit-content;
+  // height: fit-content;
+  justify-content: space-between;
   // padding: 30px;
   background-color: #ffffff;
   display: flex;

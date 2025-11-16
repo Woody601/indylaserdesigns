@@ -4,39 +4,69 @@ import styles from "./page.module.css";
 import ProductTile from "@/app/components/Product/Tile/page";
 
 export async function generateMetadata({ params }) {
-  const awaitedParams = await params; // ✅ await first
-  const { slug } = awaitedParams;
+  // ✅ params is a Promise in your setup – await it first
+  const { slug } = await params;
 
   let product = null;
+
   try {
-    const q = query(collection(db, "products"), where("slug", "==", slug));
+    const itemsRef = collection(db, "products", "drinkware", "items");
+    const q = query(itemsRef, where("slug", "==", slug));
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
-      product = { id: snapshot.docs[0].id, ...snapshot.docs[0].data() };
+      const docSnap = snapshot.docs[0];
+      const baseData = { id: docSnap.id, ...docSnap.data() };
+
+      // Fetch colors subcollection
+      const colorsRef = collection(docSnap.ref, "colors");
+      const colorsSnap = await getDocs(colorsRef);
+      const colors = colorsSnap.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
+
+      product = { ...baseData, colors };
     }
   } catch (error) {
-    console.error("Error fetching product:", error.message);
+    console.error("Error fetching product in generateMetadata:", error.message);
   }
 
-  const { name, colors = [] } = product;
+  if (!product) {
+    return {
+      title: "Product not found – Indy Laser Designs",
+    };
+  }
 
   return {
-    title: `${name} – Indy Laser Designs`,
+    title: `${product.name} – Indy Laser Designs`,
   };
 }
 
 export default async function CustomizePage({ params }) {
-  const awaitedParams = await params; // ✅ await first
-  const { slug } = awaitedParams;
+  // ✅ same here: await params before using its properties
+  const { slug } = await params;
 
   let product = null;
+
   try {
-    const q = query(collection(db, "products"), where("slug", "==", slug));
+    const itemsRef = collection(db, "products", "drinkware", "items");
+    const q = query(itemsRef, where("slug", "==", slug));
     const snapshot = await getDocs(q);
 
     if (!snapshot.empty) {
-      product = { id: snapshot.docs[0].id, ...snapshot.docs[0].data() };
+      const docSnap = snapshot.docs[0];
+      const baseData = { id: docSnap.id, ...docSnap.data() };
+
+      // Fetch colors subcollection
+      const colorsRef = collection(docSnap.ref, "colors");
+      const colorsSnap = await getDocs(colorsRef);
+      const colors = colorsSnap.docs.map((d) => ({
+        id: d.id,
+        ...d.data(),
+      }));
+
+      product = { ...baseData, colors };
     }
   } catch (error) {
     console.error("Error fetching product:", error.message);
@@ -46,17 +76,15 @@ export default async function CustomizePage({ params }) {
     return <div className={styles.error}>Product not found.</div>;
   }
 
-  const { name, colors = [] } = product;
-
   return (
     <div className={styles.productInfo}>
-      <h1 className={styles.header}>{name}</h1>
+      <h1 className={styles.header}>{product.name}</h1>
       <ProductTile
         key={product.id}
         productTitle={product.name}
         colors={product.colors}
         productSlug={product.slug}
-        productType={product.type}
+        productType={"drinkware"}
       />
     </div>
   );
