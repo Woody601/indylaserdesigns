@@ -10,8 +10,8 @@ export default function Footer() {
           <br />
           <Link href="tel:317-313-7715">317-313-7715</Link>
           <br />
-          <Link href="mailto:indylaserdesigns@gmail.com">
-            indylaserdesigns@gmail.com
+          <Link href="mailto:info@indylaserdesigns.com">
+            info@indylaserdesigns.com
           </Link>
         </section>
         <section className={`${styles.section} ${styles.social}`}>

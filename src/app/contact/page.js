@@ -11,9 +11,7 @@ export default function ContactPage() {
       <h1>Contact</h1>
       <p>
         Please call <a href="tel:317-313-7715">317-313-7715</a>, or email{" "}
-        <a href="mailto:indylaserdesigns@gmail.com">
-          indylaserdesigns@gmail.com
-        </a>{" "}
+        <a href="mailto:info@indylaserdesigns.com">info@indylaserdesigns.com</a>{" "}
         for any questions or requests, and we will get back with you as soon as
         possible.
       </p>

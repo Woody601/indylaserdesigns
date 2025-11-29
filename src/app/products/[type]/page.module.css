@@ -1,11 +1,12 @@
 .products {
   display: -ms-grid;
   display: grid;
-  gap: 2.5rem 1.5rem;
-  max-width: 1314px;
+  gap: 1.5rem;
+  max-width: 1440px;
   margin: auto auto 2rem;
   padding: 1rem;
   justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 342px));
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -17,39 +18,21 @@
 
 .header {
   padding: 0 1rem;
-  max-width: 1314px;
+  max-width: 1440px;
   font-family: Poppins;
   font-weight: 600;
   margin: 1rem auto;
 }
 
-/* Large screens: 4 columns */
-@media screen and (min-width: 1346px) {
-  .products {
-    -ms-grid-columns: (1fr)[4];
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-/* Large screens: 3 columns */
+/* Large screens */
 @media screen and (max-width: 1345px) and (min-width: 1028px) {
   .products {
-    -ms-grid-columns: (316px)[3];
-    grid-template-columns: repeat(3, 316px);
     font-size: 20px;
   }
 }
-/* Medium screens: 2 columns */
-@media screen and (max-width: 1027px) and (min-width: 688px) {
-  .products {
-    -ms-grid-columns: (316px)[2];
-    grid-template-columns: repeat(2, 316px);
-  }
-}
-/* Small screens: 1 column */
+/* Small screens*/
 @media screen and (max-width: 687px) {
   .products {
-    -ms-grid-columns: (1fr)[1];
-    grid-template-columns: repeat(1, 1fr);
     font-size: 17px;
   }
   .products {

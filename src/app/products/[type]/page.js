@@ -85,7 +85,6 @@ export default async function ProductTypePage({ params }) {
   return (
     <>
       <h1 className={styles.header}>{typeName}</h1>
-
       <div className={styles.products}>
         {products.length ? (
           products.map((p) => (
