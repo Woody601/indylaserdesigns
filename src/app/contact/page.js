@@ -15,11 +15,11 @@ export default function ContactPage() {
         for any questions or requests, and we will get back with you as soon as
         possible.
       </p>
-      {/* <p>
+      <p>
         Please enter the details of your request. We will respond as soon as
         possible.
       </p>
-      <ContactForm /> */}
+      <ContactForm />
     </div>
   );
 }

@@ -5,11 +5,6 @@
     display: grid;
     row-gap: 30px;
     padding-bottom: 30px;
-    // label,
-    // input,
-    // textarea {
-    //   font-size: 1rem;
-    // }
 
     input,
     textarea {
@@ -20,23 +15,74 @@
       font-family: Poppins;
       font-weight: 500;
     }
+
     input:focus,
     textarea:focus {
       outline: none;
     }
+
     textarea {
-      height: 91px;
+      min-height: 60px;
+      field-sizing: content;
+      height: 140px;
       padding-top: 16px;
+      padding-bottom: 16px;
       resize: vertical;
     }
+
     .button {
       width: 200px;
-      padding: 0 25px;
-      height: 50px;
       margin: auto;
+      background: #a60303;
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 4px;
+      border: none;
       font-family: Poppins;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover { background: #740202; }
+      &:disabled { opacity: 0.6; cursor: not-allowed; }
     }
   }
+}
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #2e7d32;
+  color: #fff;
+  padding: 14px 20px;
+  border-radius: 6px;
+  font-family: Poppins;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease, fadeOut 0.4s ease 3.6s forwards;
+  z-index: 1000;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.error {
+  color: #c62828;
+  background: #ffebee;
+  border: 1px solid #ef9a9a;
+  border-radius: 4px;
+  padding: 10px 16px;
+  margin: 0;
+  text-align: center;
 }
 
 .TestOne {

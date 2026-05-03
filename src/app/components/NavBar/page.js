@@ -92,11 +92,14 @@ export default function NavBar() {
           <span className={styles.bar}></span>
         </div>
         <div className={styles.items}>
+          <Link href="/" onClick={closeNav} className={styles.item}>
+            Home
+          </Link>
           <Link href="/about" onClick={closeNav} className={styles.item}>
-            About
+            About Us
           </Link>
 
-          <SubNav name="Materials">
+          {/* <SubNav name="Materials">
             <Link
               href="/materials/acrylic"
               onClick={closeNav}
@@ -134,13 +137,13 @@ export default function NavBar() {
             <Link href="/products" onClick={closeNav} className={styles.item}>
               All Products
             </Link>
-            {/* <Link
+            <Link
               href="/products/coasters"
               onClick={closeNav}
               className={styles.item}
             >
               Coasters
-            </Link> */}
+            </Link>
             <Link
               href="/products/drinkware"
               onClick={closeNav}
@@ -148,19 +151,19 @@ export default function NavBar() {
             >
               Drinkware
             </Link>
-            {/* <Link
+            <Link
               href="/products/petbowls"
               onClick={closeNav}
               className={styles.item}
             >
               Pet Bowls
-            </Link> */}
+            </Link>
           </SubNav>
           <Link href="/pricing" onClick={closeNav} className={styles.item}>
             Pricing
-          </Link>
+          </Link> */}
           <Link href="/contact" onClick={closeNav} className={styles.item}>
-            Contact
+            Contact Us
           </Link>
         </div>
       </nav>

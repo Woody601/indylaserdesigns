@@ -1,3 +1,339 @@
+$accent: #a60303;
+$dark: #313131;
+$light-bg: #f5f5f5;
+$white: #fff;
+
+// ── Banner ───────────────────────────────────────────────────────────────────
+
+.banner {
+  background: #313131;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  font-family: Poppins;
+  font-size: 13px;
+  padding: 10px 16px;
+}
+
+// ── Hero ────────────────────────────────────────────────────────────────────
+
+.hero {
+  height: 400px;
+  width: 100%;
+  background-image: url("/hero.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  background-color: rgba(0, 0, 0, 0.33);
+  background-blend-mode: darken;
+
+  h1 {
+    color: $white;
+    margin: 0 0 24px;
+    font-size: 40px;
+    font-family: Poppins;
+    text-align: center;
+  }
+}
+
+// New hero with tagline and CTAs (commented out)
+// .hero {
+//   height: 520px;
+//   gap: 16px;
+//   background-color: rgba(0, 0, 0, 0.4);
+//
+//   h1 { font-size: 48px; letter-spacing: 4px; margin: 0; }
+//
+//   .heroTagline {
+//     color: rgba(255, 255, 255, 0.85);
+//     font-family: Poppins;
+//     font-size: 16px;
+//     margin: 0;
+//     text-align: center;
+//   }
+//
+//   .heroCtas {
+//     display: flex;
+//     gap: 16px;
+//     margin-top: 8px;
+//     flex-wrap: wrap;
+//     justify-content: center;
+//   }
+// }
+
+// ── Shared button styles ─────────────────────────────────────────────────────
+
+.btnPrimary {
+  background: $accent;
+  color: $white;
+  padding: 12px 28px;
+  border-radius: 4px;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+
+  &:hover { background: darken($accent, 10%); }
+}
+
+.btnSecondary {
+  background: transparent;
+  color: $white;
+  padding: 11px 28px;
+  border-radius: 4px;
+  border: 2px solid $white;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: $white;
+    color: $dark;
+  }
+}
+
+.btnOutline {
+  display: inline-block;
+  color: $accent;
+  padding: 11px 28px;
+  border-radius: 4px;
+  border: 2px solid $accent;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+
+  &:hover {
+    background: $accent;
+    color: $white;
+  }
+}
+
+// ── Shared section heading ───────────────────────────────────────────────────
+
+.categories,
+.howItWorks,
+.about,
+.testimonials {
+  h2 {
+    text-align: center;
+    font-family: Poppins;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    color: $dark;
+  }
+}
+
+// ── Shop by Material ─────────────────────────────────────────────────────────
+
+.categories {
+  padding: 60px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .categoryGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .categoryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 32px 16px;
+    background: $white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: $dark;
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 600;
+    transition: border-color 0.2s, color 0.2s, box-shadow 0.2s;
+
+    i {
+      font-size: 28px;
+      color: $accent;
+    }
+
+    &:hover {
+      border-color: $accent;
+      color: $accent;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+  }
+}
+
+// ── How It Works ─────────────────────────────────────────────────────────────
+
+.howItWorks {
+  padding: 60px 24px;
+  background: $white;
+
+  .steps {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    max-width: 860px;
+    margin: 0 auto;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+      align-items: center;
+      row-gap: 1rem;
+    }
+  }
+
+  .step {
+    flex: 1;
+    text-align: center;
+    padding: 0 24px;
+
+    h3 {
+      font-family: Poppins;
+      font-size: 17px;
+      font-weight: 700;
+      margin: 12px 0 8px;
+      color: $dark;
+    }
+
+    p {
+      font-family: Poppins;
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+      line-height: 1.6;
+    }
+  }
+
+  .stepNumber {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: $accent;
+    color: $white;
+    font-family: Poppins;
+    font-size: 22px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .stepDivider {
+    width: 60px;
+    height: 2px;
+    background: #e0e0e0;
+    flex-shrink: 0;
+    margin-top: 26px;
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+}
+
+// ── About ─────────────────────────────────────────────────────────────────────
+
+.about {
+  padding: 60px 24px;
+  background: $light-bg;
+
+  .aboutContent {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+
+    p {
+      font-family: Poppins;
+      font-size: 15px;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+  }
+}
+
+// ── Testimonials ──────────────────────────────────────────────────────────────
+
+.testimonials {
+  padding: 60px 24px;
+  background: $white;
+
+  .testimonialGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .testimonialCard {
+    background: $light-bg;
+    border-radius: 8px;
+    padding: 28px 24px;
+    font-family: Poppins;
+
+    p {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    span {
+      font-size: 13px;
+      font-weight: 600;
+      color: $dark;
+    }
+  }
+}
+
+.overallRating {
+  text-align: center;
+  font-family: Poppins;
+  font-size: 15px;
+  color: #555;
+  margin-top: -16px;
+  margin-bottom: 32px;
+}
+
+.ratingStars,
+.reviewStars {
+  color: #f5a400;
+  letter-spacing: 2px;
+}
+
+.reviewStars {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+// ── Legacy ────────────────────────────────────────────────────────────────────
+
 .products {
   display: flex;
   flex-direction: row;
@@ -12,28 +348,4 @@
   justify-content: center;
   max-width: 1450px;
   margin: auto;
-}
-
-.hero {
-  height: 400px;
-  width: 100%;
-  background-image: url("/hero.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-  background-color: rgba(0, 0, 0, 0.33); /* darkness level */
-  background-blend-mode: darken;
-}
-.hero h1 {
-  color: white;
-  margin: 0px;
-  font-size: 40px;
-  padding-bottom: 2em;
-  font-family: Poppins;
-  text-align: center;
 }
