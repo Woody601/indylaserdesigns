@@ -8,6 +8,7 @@ export default function ContactForm() {
   const [email, setEmail] = useState("");
   const [number, setNumber] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -20,7 +21,13 @@ export default function ContactForm() {
     const res = await fetch("/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fullName, email, number, message }),
+      body: JSON.stringify({
+        fullName,
+        email,
+        number,
+        message,
+        website,
+      }),
     });
 
     if (res.ok) {
@@ -43,6 +50,7 @@ export default function ContactForm() {
     else if (name === "email") setEmail(value);
     else if (name === "number") setNumber(value);
     else if (name === "message") setMessage(value);
+    else if (name === "website") setEmail(value);
   };
 
   return (
@@ -86,6 +94,15 @@ export default function ContactForm() {
             value={message}
             onChange={handleChange}
             required
+          />
+          <input
+            type="text"
+            name="website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            autoComplete="off"
+            tabIndex={-1}
+            style={{ display: "none" }}
           />
           {error && <p className={styles.error}>{error}</p>}
           <button className={styles.button} type="submit" disabled={submitting}>

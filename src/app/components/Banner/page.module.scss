@@ -4,15 +4,9 @@
   font-family: Poppins;
   font-size: 13px;
   padding: 10px 40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   position: relative;
 }
 
@@ -30,9 +24,8 @@
   cursor: pointer;
   padding: 4px 6px;
   line-height: 1;
-  -webkit-transition: color 0.15s;
   transition: color 0.15s;
-}
-.close:hover {
-  color: #fff;
+  &:hover {
+    color: #fff;
+  }
 }
