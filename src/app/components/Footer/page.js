@@ -42,7 +42,7 @@ export default function Footer() {
         © {new Date().getFullYear()} Indy Laser Designs - All Rights Reserved.
         Website Built By{" "}
         <Link
-          href="https://mychalwood.vercel.app"
+          href="https://mychalwood.com"
           target="_blank"
           rel="noopener noreferrer"
         >
