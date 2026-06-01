@@ -1,5 +1,6 @@
 import NavBar from "./components/NavBar/page";
 import Footer from "./components/Footer/page";
+import Banner from "./components/Banner/page";
 
 import "./globals.css";
 
@@ -17,6 +18,10 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <NavBar />
+        <Banner>
+          We&rsquo;re currently revamping our website to bring you more products
+          and features — thank you for your patience!
+        </Banner>
         <main>{children}</main>
         <Footer />
       </body>

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styles from "./page.module.css";
-import Banner from "./components/Banner/page";
 
 export const metadata = {
   title: "Indy Laser Designs",
@@ -33,17 +32,20 @@ const steps = [
 
 const testimonials = [
   {
-    quote: "The quality is incredible — the engraving was perfectly precise. Will definitely order again!",
+    quote:
+      "The quality is incredible — the engraving was perfectly precise. Will definitely order again!",
     name: "Sarah M.",
     rating: 5,
   },
   {
-    quote: "Ordered custom drinkware for our wedding and it turned out better than we imagined.",
+    quote:
+      "Ordered custom drinkware for our wedding and it turned out better than we imagined.",
     name: "Jake & Emily R.",
     rating: 5,
   },
   {
-    quote: "Fast shipping and amazing attention to detail. Highly recommend for any custom work.",
+    quote:
+      "Fast shipping and amazing attention to detail. Highly recommend for any custom work.",
     name: "Tom B.",
     rating: 5,
   },
@@ -52,9 +54,6 @@ const testimonials = [
 export default function Home() {
   return (
     <>
-      <Banner>
-        We&rsquo;re currently revamping our website to bring you more products and features — thank you for your patience!
-      </Banner>
       <section className={styles.hero}>
         <h1>INDY LASER DESIGNS</h1>
         <Link href="/contact" className={styles.btnSecondary}>
@@ -101,10 +100,10 @@ export default function Home() {
         <div className={styles.aboutContent}>
           <h2>Made in Indianapolis</h2>
           <p>
-            Indy Laser Designs is a small, Indianapolis-based business specializing in custom
-            laser engraving and cutting. Whether you need personalized gifts, branded
-            merchandise, or unique home decor, we bring your ideas to life with precision
-            and care.
+            Indy Laser Designs is a small, Indianapolis-based business
+            specializing in custom laser engraving and cutting. Whether you need
+            personalized gifts, branded merchandise, or unique home decor, we
+            bring your ideas to life with precision and care.
           </p>
           <Link href="/about" className={styles.btnOutline}>
             Learn More
